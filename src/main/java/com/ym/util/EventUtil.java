@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerEvent;
 public abstract class EventUtil extends PlayerEvent implements Cancellable {
 
     public EventUtil(Player who) {
+
         super(who);
     }
 }

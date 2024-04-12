@@ -1,16 +1,12 @@
 package com.ym.command;
 
-import com.ym.util.ConfigUtil;
+import com.ym.util.config.RegConfigUtil;
 import com.ym.util.SessionUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.util.StringUtil;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author YiMeng
@@ -33,7 +29,7 @@ public class LoginCommand implements CommandExecutor {
             Player player = (Player) sender;
             if (args.length == 1) {
                 String password = args[0];
-                String loginPassword = ConfigUtil.getData().getString(name + ".password");
+                String loginPassword = RegConfigUtil.getData().getString(name + ".password");
 
 
                 if (loginPassword == null){

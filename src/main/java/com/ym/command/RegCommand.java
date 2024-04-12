@@ -1,6 +1,6 @@
 package com.ym.command;
 
-import com.ym.util.ConfigUtil;
+import com.ym.util.config.RegConfigUtil;
 import com.ym.util.SessionUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -10,10 +10,8 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author YiMeng
@@ -70,7 +68,7 @@ public class RegCommand implements CommandExecutor {
     private  void  regPlayer(String name,String uuid ,String password,CommandSender sender){
 
         Map<String,String> hashMap=new HashMap(16);
-        YamlConfiguration data = ConfigUtil.getData();
+        YamlConfiguration data = RegConfigUtil.getData();
         if (data.get(name)!=null) {
             sender.sendMessage(ChatColor.RED+"您已经注册过了,不可以重复注册");
             return;
@@ -79,7 +77,7 @@ public class RegCommand implements CommandExecutor {
         hashMap.put("password",password);
         data.set(name,hashMap);
         try {
-            data.save(ConfigUtil.getFile());
+            data.save(RegConfigUtil.getFile());
             sender.sendMessage(ChatColor.YELLOW+"注册成功");
             SessionUtil.setPlayerEntityMapByPlayer((Player) sender);
         } catch (IOException e) {

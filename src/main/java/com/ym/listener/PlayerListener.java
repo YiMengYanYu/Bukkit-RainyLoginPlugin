@@ -1,22 +1,14 @@
 package com.ym.listener;
 
-import com.ym.util.ConfigUtil;
+import com.ym.util.config.RegConfigUtil;
 import com.ym.util.SessionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryOpenEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -46,7 +38,7 @@ public class PlayerListener implements Listener {
 
     private void isNoRegister(Player player)
     {
-        if (ConfigUtil.isRegister(player.getName())) {
+        if (RegConfigUtil.isRegister(player.getName())) {
             isNoLogin(player);
             return;
         }
@@ -64,6 +56,12 @@ public class PlayerListener implements Listener {
         }
 
         SessionUtil.destroySession(player.getName());
+//        PlayerInventory inventory = player.getInventory();
+//        ItemStack[] contents = inventory.getContents();
+//        inventory.clear();
+
+
+
 
         player.sendMessage("请登录");
         player.sendMessage("/login <密码>");
