@@ -41,7 +41,7 @@ public  class ConfigUtil {
      * 传统File方式创建文件 不需要在资源文件夹中创建文件
      * @param fileName
      */
-    public static void createFile(String fileName) {
+    protected static void createFile(String fileName) {
 
         // 定义文件路径（相对路径）
         String relativePath = FileConstant.YMLOGIN_YML_PATH+fileName;
@@ -75,10 +75,6 @@ public  class ConfigUtil {
         }
 
     }
-
-
-
-
 
 
 

@@ -7,7 +7,7 @@ import com.ym.ymlogin.YMLogin;
 /**
  * @author YiMeng
  * @DateTime: 2024/4/5 0:17
- * @Description: TODO
+ * @Description: 注册用户信息配置文件工具类
  */
 public class RegConfigUtil  extends ConfigUtil {
 
