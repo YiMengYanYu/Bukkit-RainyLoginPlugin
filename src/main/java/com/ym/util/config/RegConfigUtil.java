@@ -13,8 +13,9 @@ public class RegConfigUtil  extends ConfigUtil {
 
 
 
-    public static void loadData(YMLogin ymLogin) {
-       loadData(ymLogin, FileConstant.PLAYER_PASSWORDS_YML);
+    public static void loadData() {
+
+       createFile(FileConstant.PLAYER_PASSWORDS_YML);
     }
 
 

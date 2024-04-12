@@ -2,6 +2,8 @@ package com.ym.util.config;
 
 import com.ym.constants.FileConstant;
 import com.ym.ymlogin.YMLogin;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -36,10 +38,10 @@ public  class ConfigUtil {
 
 
     /**
-     * 传统File方式创建文件
+     * 传统File方式创建文件 不需要在资源文件夹中创建文件
      * @param fileName
      */
-    public static void create(String fileName) {
+    public static void createFile(String fileName) {
 
         // 定义文件路径（相对路径）
         String relativePath = FileConstant.YMLOGIN_YML_PATH+fileName;
@@ -48,7 +50,7 @@ public  class ConfigUtil {
         File passwordFile = new File(relativePath);
 
         // 判断文件夹YMLogin是否存在，如果不存在则创建
-        File ymLoginDirectory = new File("./YMLogin");
+        File ymLoginDirectory = new File(FileConstant.YMLOGIN_YML_PATH);
         if (!ymLoginDirectory.exists()) {
             ymLoginDirectory.mkdir(); // 创建目录
         }
@@ -56,14 +58,20 @@ public  class ConfigUtil {
         // 判断文件是否存在，如果不存在则创建
         if (!passwordFile.exists()) {
             try {
-                passwordFile.createNewFile(); // 创建文件
-                System.out.println("文件player_passwords.yml已创建于 ./YMLogin 目录下");
+                if (passwordFile.createNewFile()) {
+                    Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"文件"+fileName+"已创建于 "+FileConstant.YMLOGIN_YML_PATH+"目录下");
+                    //创建文件后给文件对象赋值
+                    file=passwordFile;
+                    return;
+                }
+                throw  new IOException();
             } catch (IOException e) {
-                System.err.println("创建文件player_passwords.yml时发生错误: " + e.getMessage());
-                e.printStackTrace();
+                Bukkit.getConsoleSender().sendMessage(ChatColor.RED+"创建文件 "+fileName+"时发生错误: " + e.getMessage());
             }
         } else {
-            System.out.println("文件player_passwords.yml已存在于 ./YMLogin 目录下");
+            // 文件存在就直接把文件对象赋值
+            file=passwordFile;
+            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"文件"+fileName+"已存在于 "+FileConstant.YMLOGIN_YML_PATH+" 目录下");
         }
 
     }

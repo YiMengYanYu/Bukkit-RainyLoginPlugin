@@ -20,9 +20,7 @@ public final class YMLogin extends JavaPlugin {
      */
     @Override
     public void onLoad() {
-        Bukkit.getConsoleSender().sendMessage("§a世界正在加载");
-
-
+        RegConfigUtil.loadData();
     }
 
     /**
@@ -30,11 +28,11 @@ public final class YMLogin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        Bukkit.getConsoleSender().sendMessage("§a 插件启动成功");
+        Bukkit.getConsoleSender().sendMessage("§a登录插件启动成功");
         //注册玩家监听器
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
         Bukkit.getPluginManager().registerEvents(new CancellationEventsHandler(), this);
-        RegConfigUtil.loadData(this);
+
 
         YamlConfiguration data = RegConfigUtil.getData();
 
