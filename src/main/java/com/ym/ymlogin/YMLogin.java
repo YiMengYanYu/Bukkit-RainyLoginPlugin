@@ -3,12 +3,11 @@ package com.ym.ymlogin;
 import com.ym.command.LoginCommand;
 import com.ym.command.RegCommand;
 import com.ym.evevtmanager.CancellationEventsHandler;
-import com.ym.listener.PlayerListener;
+import com.ym.listener.PlayerJoinListener;
 
 import com.ym.util.config.RegConfigUtil;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,7 +38,7 @@ public final class YMLogin extends JavaPlugin {
 
         Bukkit.getConsoleSender().sendMessage("§a登录插件启动成功");
         //注册玩家监听器
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
         Bukkit.getPluginManager().registerEvents(new CancellationEventsHandler(), this);
 
 

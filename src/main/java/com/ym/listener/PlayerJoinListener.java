@@ -10,13 +10,17 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.Objects;
+import java.util.Timer;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author YiMeng
  * @DateTime: 2024/4/4 0:04
  * @Description: TODO
  */
-public class PlayerListener implements Listener {
+public class PlayerJoinListener implements Listener {
 
 
 
@@ -34,8 +38,7 @@ public class PlayerListener implements Listener {
         // 阻止默认的加入消息显示
         playerJoinEvent.setJoinMessage(null);
         isNoRegister(player);
-        String hostString = player.getAddress().getHostString();
-        Bukkit.getConsoleSender().sendMessage(hostString);
+
 
     }
 
@@ -46,9 +49,22 @@ public class PlayerListener implements Listener {
             return;
         }
         SessionUtil.destroySession(player.getName());
-        player.sendMessage("请注册后进入游戏");
-        player.sendMessage("/reg <密码> <密码>");
 
+        ScheduledExecutorService executor =new ScheduledThreadPoolExecutor(1);
+
+        Runnable taskLogin = () -> {
+
+            if (SessionUtil.getPlayerState(player.getName())) {
+                executor.shutdown();
+
+            }else {
+
+                player.sendMessage("请注册后进入游戏");
+                player.sendMessage("/reg <密码> <密码>");
+            }
+
+        };
+        executor.scheduleAtFixedRate(taskLogin, 0, 5, TimeUnit.SECONDS);
     }
 
     private  void isNoLogin(Player player) {
@@ -59,11 +75,24 @@ public class PlayerListener implements Listener {
             player.sendMessage(ChatColor.GREEN+"通过ip自动登录");
             return;
         }
-
+        //如果登录IP和上次不一致就先销毁session
         SessionUtil.destroySession(player.getName());
 
+        ScheduledExecutorService executor =new ScheduledThreadPoolExecutor(1);
 
-        player.sendMessage("请登录");
-        player.sendMessage("/login <密码>");
+        Runnable taskLogin = () -> {
+
+            if (SessionUtil.getPlayerState(player.getName())) {
+
+                executor.shutdown();
+
+            }else {
+                player.sendMessage("请登录");
+                player.sendMessage("/login <密码>");
+            }
+
+        };
+        executor.scheduleAtFixedRate(taskLogin, 0, 5, TimeUnit.SECONDS);
+
     }
 }

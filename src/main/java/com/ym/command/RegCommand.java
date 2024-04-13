@@ -59,7 +59,7 @@ public class RegCommand implements CommandExecutor {
      */
     private void regPlayer(String name, String uuid, String password, CommandSender sender) {
 
-        Map<String, String> hashMap = new HashMap(16);
+        Map<String, String> hashMap = new HashMap(8);
         YamlConfiguration data = RegConfigUtil.getData();
         if (data.get(name) != null) {
             sender.sendMessage(ChatColor.RED + "您已经注册过了,不可以重复注册");
@@ -73,7 +73,9 @@ public class RegCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.YELLOW + "注册成功");
             Player player = (Player) sender;
             player.setInvulnerable(false);
+            //注册后写入session
             SessionUtil.setPlayerEntityMapByPlayer(player);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

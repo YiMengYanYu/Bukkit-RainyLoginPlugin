@@ -57,7 +57,11 @@ public class SessionUtil {
         playerEntityMap.put(playerName,playerEntity);
     }
 
-    
+    /**
+     * 获取玩家登录状态
+     * @param playerName
+     * @return
+     */
     public static boolean getPlayerState(String playerName) {
         PlayerEntity playerEntity = playerEntityMap.get(playerName);
         return playerEntity!=null;
