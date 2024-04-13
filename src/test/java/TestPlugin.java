@@ -1,5 +1,11 @@
 
+import com.ym.entity.PasswordConfig;
 import org.junit.Test;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
+import static com.ym.util.config.PasswordConfigSet.snakeCaseToCamelCase;
 
 
 /**
@@ -8,6 +14,9 @@ import org.junit.Test;
  * @Description: TODO
  */
 public class TestPlugin {
+
+
+
 
 
 }
