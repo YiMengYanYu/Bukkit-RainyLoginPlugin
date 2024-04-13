@@ -42,9 +42,10 @@ public class PlayerListener implements Listener {
             isNoLogin(player);
             return;
         }
-
+        SessionUtil.destroySession(player.getName());
         player.sendMessage("请注册后进入游戏");
         player.sendMessage("/reg <密码> <密码>");
+
     }
 
     private  void isNoLogin(Player player) {

@@ -6,9 +6,12 @@ import com.ym.evevtmanager.CancellationEventsHandler;
 import com.ym.listener.PlayerListener;
 
 import com.ym.util.config.RegConfigUtil;
+
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
 
 /**
  * @author YiMeng
@@ -20,6 +23,10 @@ public final class YMLogin extends JavaPlugin {
      */
     @Override
     public void onLoad() {
+
+        Bukkit.broadcastMessage("服务器已刷新请重新登录");
+        Bukkit.broadcastMessage("/login <密码>");
+
         RegConfigUtil.loadData();
     }
 
@@ -28,6 +35,8 @@ public final class YMLogin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
+
+
         Bukkit.getConsoleSender().sendMessage("§a登录插件启动成功");
         //注册玩家监听器
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
@@ -53,6 +62,7 @@ public final class YMLogin extends JavaPlugin {
         // Plugin shutdown logic
         Bukkit.getConsoleSender().sendMessage("§a 插件关闭");
     }
+
 
 
 
