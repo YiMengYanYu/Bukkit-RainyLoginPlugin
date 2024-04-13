@@ -28,6 +28,9 @@ public class PlayerListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent playerJoinEvent) {
         Player player = playerJoinEvent.getPlayer();
+        //设置玩家无敌
+        player.setInvulnerable(true);
+
         // 阻止默认的加入消息显示
         playerJoinEvent.setJoinMessage(null);
         isNoRegister(player);
@@ -52,16 +55,12 @@ public class PlayerListener implements Listener {
         String playerIp = SessionUtil.getPlayerIpByName(player.getName());
         String ip = player.getAddress().getHostString();
         if (Objects.equals(playerIp, ip)) {
+            player.setInvulnerable(false);
             player.sendMessage(ChatColor.GREEN+"通过ip自动登录");
             return;
         }
 
         SessionUtil.destroySession(player.getName());
-//        PlayerInventory inventory = player.getInventory();
-//        ItemStack[] contents = inventory.getContents();
-//        inventory.clear();
-
-
 
 
         player.sendMessage("请登录");

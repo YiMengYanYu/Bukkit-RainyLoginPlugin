@@ -48,6 +48,7 @@ public class LoginCommand implements CommandExecutor {
 
         if (password.equals(loginPassword)) {
             sender.sendMessage(ChatColor.YELLOW + "登录成功");
+            player.setInvulnerable(false);
             SessionUtil.setPlayerEntityMapByPlayer(player);
         } else {
             sender.sendMessage(ChatColor.RED + "密码错误");

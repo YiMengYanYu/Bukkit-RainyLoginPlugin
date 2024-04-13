@@ -3,7 +3,9 @@ package com.ym.evevtmanager;
 import com.ym.util.SessionUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -214,13 +216,5 @@ public class CancellationEventsHandler implements Listener {
 
     }
 
-    @EventHandler
-    public  void  entityDamageByEntityEvent(EntityDamageByEntityEvent event){
 
-        Entity damager = event.getDamager();
-
-
-
-
-    }
 }

@@ -71,7 +71,9 @@ public class RegCommand implements CommandExecutor {
         try {
             data.save(RegConfigUtil.getFile());
             sender.sendMessage(ChatColor.YELLOW + "注册成功");
-            SessionUtil.setPlayerEntityMapByPlayer((Player) sender);
+            Player player = (Player) sender;
+            player.setInvulnerable(false);
+            SessionUtil.setPlayerEntityMapByPlayer(player);
         } catch (IOException e) {
             e.printStackTrace();
         }
