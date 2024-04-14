@@ -1,6 +1,6 @@
 package com.ym.entity;
 
-import lombok.ToString;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import java.util.List;
  * @DateTime: 2024/4/14 3:18
  * @Description: 存放与密码验证规则和设置相关的变量
  */
-@ToString
-public class PasswordConfig {
+
+public class PasswordConfigEntity {
 
 
     /**
@@ -45,7 +45,7 @@ public class PasswordConfig {
      */
     public static volatile String CHECK_CONTAIN_DIGIT;
     /**
-     * 是否区分大小写
+     * 是否包含大小写
      */
     public static volatile String CHECK_CONTAIN_UPPER_LOWER_CASE;
     /**

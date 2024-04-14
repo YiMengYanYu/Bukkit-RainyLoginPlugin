@@ -1,7 +1,9 @@
 package com.ym.command;
 
 import com.ym.util.CommandUtil;
+import com.ym.util.PasswordCheckUtil;
 import com.ym.util.SessionUtil;
+import com.ym.util.config.ConfigUtil;
 import com.ym.util.config.RegConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -43,7 +45,7 @@ public class RegCommand implements CommandExecutor {
         }
         String name = player.getName();
         String uuid = player.getUniqueId().toString();
-        regPlayer(name, uuid, args[0], sender);
+        regPlayer(name, uuid, args[0], (Player) sender);
 
         return true;
     }
@@ -55,23 +57,34 @@ public class RegCommand implements CommandExecutor {
      * @param name     玩家名字
      * @param uuid     玩家uuid
      * @param password 玩家密码
-     * @param sender   命令的来源
+     * @param player   命令的来源
      */
-    private void regPlayer(String name, String uuid, String password, CommandSender sender) {
+    private void regPlayer(String name, String uuid, String password, Player player) {
 
+
+
+        if (!PasswordCheckUtil.checkPassword(password,player)) {
+            return;
+        }
         Map<String, String> hashMap = new HashMap(8);
         YamlConfiguration data = RegConfigUtil.getData();
         if (data.get(name) != null) {
-            sender.sendMessage(ChatColor.RED + "您已经注册过了,不可以重复注册");
+            player.sendMessage(ChatColor.RED + "您已经注册过了,不可以重复注册");
             return;
         }
+
+
+
+
+
+
         hashMap.put("uuid", uuid + "");
         hashMap.put("password", password + "");
         data.set(name, hashMap);
         try {
             data.save(RegConfigUtil.getFile());
-            sender.sendMessage(ChatColor.YELLOW + "注册成功");
-            Player player = (Player) sender;
+            player.sendMessage(ChatColor.YELLOW + "注册成功");
+
             player.setInvulnerable(false);
             //注册后写入session
             SessionUtil.setPlayerEntityMapByPlayer(player);

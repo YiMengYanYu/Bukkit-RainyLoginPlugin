@@ -5,7 +5,7 @@ import com.ym.command.RegCommand;
 import com.ym.evevtmanager.CancellationEventsHandler;
 import com.ym.listener.PlayerJoinListener;
 
-import com.ym.util.config.PasswordConfigSet;
+import com.ym.util.config.PasswordConfigSetUtil;
 import com.ym.util.config.RegConfigUtil;
 
 import org.bukkit.Bukkit;
@@ -23,7 +23,7 @@ public final class YMLogin extends JavaPlugin {
      */
     @Override
     public void onLoad() {
-        PasswordConfigSet.setConfig(this);
+        PasswordConfigSetUtil.setConfig(this);
         Bukkit.broadcastMessage("服务器已刷新请重新登录");
         Bukkit.broadcastMessage("/login <密码>");
 

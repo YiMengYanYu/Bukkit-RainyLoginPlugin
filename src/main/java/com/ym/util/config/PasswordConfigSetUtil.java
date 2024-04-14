@@ -1,6 +1,6 @@
 package com.ym.util.config;
 
-import com.ym.entity.PasswordConfig;
+import com.ym.entity.PasswordConfigEntity;
 import com.ym.ymlogin.YMLogin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @DateTime: 2024/4/14 4:33
  * @Description: TODO
  */
-public class PasswordConfigSet extends ConfigUtil {
+public class PasswordConfigSetUtil extends ConfigUtil {
 
     private static final Logger logger = Bukkit.getLogger();
 
@@ -25,7 +25,7 @@ public class PasswordConfigSet extends ConfigUtil {
     public static void setConfig(YMLogin ymLogin) {
         loadData(ymLogin, "password-policy-config.yml");
         YamlConfiguration ymlData = getData();
-        Field[] fields = PasswordConfig.class.getDeclaredFields();
+        Field[] fields = PasswordConfigEntity.class.getDeclaredFields();
         for (Field field : fields) {
             if (Modifier.isFinal(field.getModifiers())) {
                 continue;
