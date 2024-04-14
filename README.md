@@ -10,6 +10,7 @@
 2.理论支持1.8以上mc版本
 
 3.支持spigot paper purpur 服务端
+
 ####配置文件说明
 YMLogin/player_passwords.yml 存储玩家账号密码信息配置文件
 
