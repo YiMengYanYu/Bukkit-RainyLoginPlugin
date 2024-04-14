@@ -13,7 +13,7 @@
 
 3.支持spigot paper purpur 服务端
 
-####配置文件说明
+#### 配置文件说明
 
 YMLogin/player_passwords.yml 存储玩家账号密码信息配置文件
 
