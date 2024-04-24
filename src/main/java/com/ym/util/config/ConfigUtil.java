@@ -5,6 +5,7 @@ import com.ym.ymlogin.YMLogin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public  class ConfigUtil {
      * @param ymLogin
      * @param configName
      */
-    protected  static void loadData(YMLogin ymLogin,String configName) {
+    protected  static void loadData(JavaPlugin ymLogin, String configName) {
 
 
         ConfigUtil.file = new File(ymLogin.getDataFolder(), configName);

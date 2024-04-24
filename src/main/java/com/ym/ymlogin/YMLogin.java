@@ -1,5 +1,6 @@
 package com.ym.ymlogin;
 
+import com.ym.command.BaiCommand;
 import com.ym.command.LoginCommand;
 import com.ym.command.RegCommand;
 import com.ym.evevtmanager.CancellationEventsHandler;
@@ -48,6 +49,8 @@ public final class YMLogin extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§"+data.toString());
         Bukkit.getPluginCommand("register").setExecutor(new RegCommand());
         Bukkit.getPluginCommand("login").setExecutor(new LoginCommand());
+        Bukkit.getPluginCommand("bai").setExecutor(new BaiCommand());
+
 
 
 

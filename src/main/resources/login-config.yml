@@ -1,0 +1,10 @@
+#此文件配置修改后重启和reload才会生效
+
+whitelist:
+  #白名单检测总开关
+  whitelistCheckSwitch: true
+  #白名单检测是否忽略大小写
+  ignoreCase: true
+ipLogin:
+  #IP登录检测总开关
+  ipLoginCheckSwitch: true

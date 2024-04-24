@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Objects;
 import java.util.Timer;
@@ -42,6 +43,22 @@ public class PlayerJoinListener implements Listener {
 
     }
 
+    /**
+     * 玩家退出游戏时
+     * @param playerQuitEvent
+     */
+    @EventHandler
+    public  void  playerQuitEvent(PlayerQuitEvent playerQuitEvent){
+
+
+
+
+    }
+
+    /**
+     * 检测是否注册
+     * @param player
+     */
     private void isNoRegister(Player player)
     {
         if (RegConfigUtil.isRegister(player.getName())) {

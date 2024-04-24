@@ -41,6 +41,8 @@ commands:
     description: /register <密码> <第二次输入密码>
     usage: /register <password> <password>
     aliases: ["reg"]
+  bai:
+
 
 
 #修改日志的前缀
