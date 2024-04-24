@@ -27,9 +27,14 @@ public class LoginCommand implements CommandExecutor {
      */
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String name = sender.getName();
-        Player player = CommandUtil.playerCommandHandler(sender, args, 1);
 
+        Player player = CommandUtil.playerCommandHandler(sender, args, 1);
+        String name = sender.getName();
+
+        if (SessionUtil.getPlayerState(name)) {
+            sender.sendMessage("您已经登录过了，请不要重复登录");
+            return  false;
+        }
         if (player == null) {
             return false;
         }
@@ -48,6 +53,7 @@ public class LoginCommand implements CommandExecutor {
 
         if (password.equals(loginPassword)) {
             sender.sendMessage(ChatColor.YELLOW + "登录成功");
+            //登录成功后，玩家取消无敌
             player.setInvulnerable(false);
             SessionUtil.setPlayerEntityMapByPlayer(player);
         } else {

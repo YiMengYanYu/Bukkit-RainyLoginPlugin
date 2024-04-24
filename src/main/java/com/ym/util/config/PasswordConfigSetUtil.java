@@ -5,7 +5,9 @@ import com.ym.ymlogin.YMLogin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.logging.Logger;
@@ -15,8 +17,9 @@ import java.util.logging.Logger;
  * @DateTime: 2024/4/14 4:33
  * @Description: TODO
  */
-public class PasswordConfigSetUtil extends ConfigUtil {
-
+public class PasswordConfigSetUtil {
+    private static YamlConfiguration data;
+    private static File file = null;
     private static final Logger logger = Bukkit.getLogger();
 
     /**
@@ -75,4 +78,38 @@ public class PasswordConfigSetUtil extends ConfigUtil {
 
         return camelStr.toString();
     }
+
+    /**
+     * 使用Bukkit加载配置文件,如果resources(资源目录)下没有配置文件就不会加载
+     * @param ymLogin
+     * @param configName
+     */
+    protected  static void loadData(JavaPlugin ymLogin, String configName) {
+
+
+        file = new File(ymLogin.getDataFolder(), configName);
+        if (!file.exists()) {
+            ymLogin.getLogger().info(configName+" 文件不存在，已创建新文件");
+            ymLogin.saveResource(configName, false);
+        }
+        data = YamlConfiguration.loadConfiguration(file);
+        ymLogin.getLogger().info(configName+" 文件成功加载");
+    }
+    /**
+     * 通过File对象重新加载配置文件 返回 YamlConfiguration
+     * @return YamlConfiguration
+     */
+    public static YamlConfiguration getData() {
+        data = YamlConfiguration.loadConfiguration(file);
+        return data;
+    }
+
+    /**
+     * 获取File对象
+     * @return
+     */
+    public static File getFile() {
+        return file;
+    }
+
 }

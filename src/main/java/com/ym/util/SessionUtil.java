@@ -60,7 +60,7 @@ public class SessionUtil {
     /**
      * 获取玩家登录状态
      * @param playerName
-     * @return
+     * @return 如果登录就返回true
      */
     public static boolean getPlayerState(String playerName) {
         PlayerEntity playerEntity = playerEntityMap.get(playerName);

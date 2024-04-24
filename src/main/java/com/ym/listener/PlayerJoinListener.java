@@ -1,5 +1,6 @@
 package com.ym.listener;
 
+import com.ym.entity.LoginConfig;
 import com.ym.util.config.RegConfigUtil;
 import com.ym.util.SessionUtil;
 import org.bukkit.Bukkit;
@@ -32,12 +33,13 @@ public class PlayerJoinListener implements Listener {
      */
     @EventHandler(ignoreCancelled = true)
     public void playerJoin(PlayerJoinEvent playerJoinEvent) {
+        // 阻止默认的加入消息显示
+        playerJoinEvent.setJoinMessage(null);
         Player player = playerJoinEvent.getPlayer();
         //设置玩家无敌
         player.setInvulnerable(true);
 
-        // 阻止默认的加入消息显示
-        playerJoinEvent.setJoinMessage(null);
+
         isNoRegister(player);
 
 
@@ -49,8 +51,13 @@ public class PlayerJoinListener implements Listener {
      */
     @EventHandler
     public  void  playerQuitEvent(PlayerQuitEvent playerQuitEvent){
+        //如果ip登录配置是关闭的
+        if (!LoginConfig.ipLoginCheckSwitch){
+            Player player = playerQuitEvent.getPlayer();
 
+            SessionUtil.destroySession(player.getName());
 
+        }
 
 
     }
@@ -61,6 +68,7 @@ public class PlayerJoinListener implements Listener {
      */
     private void isNoRegister(Player player)
     {
+        //如果注册了
         if (RegConfigUtil.isRegister(player.getName())) {
             isNoLogin(player);
             return;
@@ -84,16 +92,28 @@ public class PlayerJoinListener implements Listener {
         executor.scheduleAtFixedRate(taskLogin, 0, 5, TimeUnit.SECONDS);
     }
 
+    /**
+     * 检测是否在登录状态
+     * @param player
+     */
     private  void isNoLogin(Player player) {
-        String playerIp = SessionUtil.getPlayerIpByName(player.getName());
-        String ip = player.getAddress().getHostString();
-        if (Objects.equals(playerIp, ip)) {
-            player.setInvulnerable(false);
-            player.sendMessage(ChatColor.GREEN+"通过ip自动登录");
-            return;
+
+        if (SessionUtil.getPlayerState(player.getName())) {
+
+            String playerIp = SessionUtil.getPlayerIpByName(player.getName());
+            String ip = player.getAddress().getHostString();
+            if (Objects.equals(playerIp, ip)) {
+                //关闭无敌
+                player.setInvulnerable(false);
+                player.sendMessage(ChatColor.GREEN+"通过ip自动登录");
+                return;
+            }
+            //如果登录的IP和上次不一致就先销毁session
+            SessionUtil.destroySession(player.getName());
         }
-        //如果登录IP和上次不一致就先销毁session
-        SessionUtil.destroySession(player.getName());
+
+
+        //没有session或者登录的IP和上次不一致就发送登录信息
 
         ScheduledExecutorService executor =new ScheduledThreadPoolExecutor(1);
 

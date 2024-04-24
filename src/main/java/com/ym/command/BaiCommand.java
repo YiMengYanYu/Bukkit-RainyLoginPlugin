@@ -1,5 +1,6 @@
 package com.ym.command;
 
+import com.ym.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Logger;
 
 /**
@@ -22,7 +24,15 @@ public class BaiCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (args.length==0||args[0]==null){
+        if (sender instanceof Player){
+            Player player = (Player) sender;
+            if (!player.isOp()) {
+                player.sendMessage("你不可以使用这个命令");
+                return false;
+            }
+
+        }
+        if (args.length<=1||args[0]==null){
             sender.sendMessage("请输入正确的命令");
             return false;
         }
@@ -30,6 +40,10 @@ public class BaiCommand implements TabExecutor {
         switch (args[0]){
             case "add":
                 if (args.length==2||args[1]!=null){
+                    WhiteListConfigUtil.whitelist.add(args[1]);
+                    WhiteListConfigUtil.saveConfig();
+
+                    Bukkit.getConsoleSender().sendMessage("保存白名单成功");
 
 
                 }

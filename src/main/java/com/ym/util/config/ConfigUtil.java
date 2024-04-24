@@ -16,8 +16,8 @@ import java.io.IOException;
  * @Description: 配置文件通用父类，请不要直接调用
  */
 public  class ConfigUtil {
-    protected static YamlConfiguration data;
-    protected static File file = null;
+    private static YamlConfiguration data;
+    private static File file = null;
 
 
     /**
