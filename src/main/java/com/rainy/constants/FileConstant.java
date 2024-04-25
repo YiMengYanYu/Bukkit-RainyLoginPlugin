@@ -1,4 +1,4 @@
-package com.ym.constants;
+package com.rainy.constants;
 
 /**
  * @author YiMeng
@@ -13,7 +13,7 @@ public class FileConstant {
     /**
      * 配置文件夹的相对路径
      */
-    public static final String YMLOGIN_YML_PATH = "./plugins/YMLogin/";
+    public static final String YMLOGIN_YML_PATH = "./plugins/RainyLogin/";
 
 
 }

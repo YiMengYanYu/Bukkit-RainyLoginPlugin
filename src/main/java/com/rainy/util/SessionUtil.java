@@ -1,8 +1,7 @@
-package com.ym.util;
+package com.rainy.util;
 
-import com.ym.entity.PlayerEntity;
+import com.rainy.entity.PlayerEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerEvent;
 
 import java.util.HashMap;
 import java.util.Map;

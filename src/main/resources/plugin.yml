@@ -1,9 +1,9 @@
 #项目名称
-name: YMLogin
+name: RainyLogin
 #版本号
 version: '${project.version}'
 #启动类类名
-main: com.ym.ymlogin.YMLogin
+main: com.rainy.RainyLogin
 #游戏大版本
 api-version: 1.20
 #作者
@@ -42,9 +42,10 @@ commands:
     usage: /register <password> <password>
     aliases: ["reg"]
   bai:
+  rws:
 
 
 
 #修改日志的前缀
-perfix: YMLoginPlugin
+perfix: RainyLogin
 # player_passwords.yml

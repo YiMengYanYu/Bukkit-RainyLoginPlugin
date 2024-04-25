@@ -1,24 +1,15 @@
-package com.ym.evevtmanager;
+package com.rainy.evevtmanager;
 
-import com.ym.util.SessionUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
+import com.rainy.util.SessionUtil;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
-import org.bukkit.inventory.InventoryView;
-
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author YiMeng

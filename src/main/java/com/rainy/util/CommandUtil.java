@@ -1,4 +1,4 @@
-package com.ym.util;
+package com.rainy.util;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

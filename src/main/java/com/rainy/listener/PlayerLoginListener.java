@@ -1,10 +1,9 @@
-package com.ym.listener;
+package com.rainy.listener;
 
-import com.ym.util.config.WhiteListConfigUtil;
+import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 
 import java.util.logging.Logger;

@@ -1,17 +1,19 @@
-package com.ym.ymlogin;
+package com.rainy;
 
-import com.ym.command.BaiCommand;
-import com.ym.command.LoginCommand;
-import com.ym.command.RegCommand;
-import com.ym.evevtmanager.CancellationEventsHandler;
-import com.ym.listener.PlayerJoinListener;
+import com.rainy.command.BaiCommand;
+import com.rainy.command.LoginCommand;
+import com.rainy.command.RegCommand;
+import com.rainy.command.WSCommand;
+import com.rainy.evevtmanager.CancellationEventsHandler;
+import com.rainy.listener.PlayerJoinListener;
 
-import com.ym.listener.PlayerLoginListener;
-import com.ym.util.config.LoginConfigUtil;
-import com.ym.util.config.PasswordConfigSetUtil;
-import com.ym.util.config.RegConfigUtil;
+import com.rainy.listener.PlayerLoginListener;
+import com.rainy.util.config.LoginConfigUtil;
+import com.rainy.util.config.PasswordConfigSetUtil;
+import com.rainy.util.config.RegConfigUtil;
 
-import com.ym.util.config.WhiteListConfigUtil;
+import com.rainy.util.config.WhiteListConfigUtil;
+import com.rainy.websocket.WebSocketClient;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,13 +22,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 /**
  * @author YiMeng
  */
-public final class YMLogin extends JavaPlugin {
+public final class RainyLogin extends JavaPlugin {
 
     /**
      * 世界加载前
      */
     @Override
     public void onLoad() {
+        WebSocketClient.setJavaPlugin(this);
         //登录配置文件
         LoginConfigUtil.createLoginConfig(this);
         //白名单配置文件
@@ -36,6 +39,7 @@ public final class YMLogin extends JavaPlugin {
         Bukkit.broadcastMessage("/login <密码>");
         //注册配置文件
         RegConfigUtil.loadData();
+        WebSocketClient.ws();
     }
 
     /**
@@ -58,6 +62,8 @@ public final class YMLogin extends JavaPlugin {
         Bukkit.getPluginCommand("register").setExecutor(new RegCommand());
         Bukkit.getPluginCommand("login").setExecutor(new LoginCommand());
         Bukkit.getPluginCommand("bai").setExecutor(new BaiCommand());
+
+        Bukkit.getPluginCommand("rws").setExecutor(new WSCommand());
 
 
 

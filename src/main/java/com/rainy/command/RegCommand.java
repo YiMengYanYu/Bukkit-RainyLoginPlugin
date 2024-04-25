@@ -1,10 +1,9 @@
-package com.ym.command;
+package com.rainy.command;
 
-import com.ym.util.CommandUtil;
-import com.ym.util.PasswordCheckUtil;
-import com.ym.util.SessionUtil;
-import com.ym.util.config.ConfigUtil;
-import com.ym.util.config.RegConfigUtil;
+import com.rainy.util.CommandUtil;
+import com.rainy.util.PasswordCheckUtil;
+import com.rainy.util.SessionUtil;
+import com.rainy.util.config.RegConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

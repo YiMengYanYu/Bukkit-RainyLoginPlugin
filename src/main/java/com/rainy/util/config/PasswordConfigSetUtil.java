@@ -1,7 +1,7 @@
-package com.ym.util.config;
+package com.rainy.util.config;
 
-import com.ym.entity.PasswordConfigEntity;
-import com.ym.ymlogin.YMLogin;
+import com.rainy.entity.PasswordConfigEntity;
+import com.rainy.RainyLogin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -25,8 +25,8 @@ public class PasswordConfigSetUtil {
     /**
      * 设置密码配置
      */
-    public static void setConfig(YMLogin ymLogin) {
-        loadData(ymLogin, "password-policy-config.yml");
+    public static void setConfig(RainyLogin rainyLogin) {
+        loadData(rainyLogin, "password-policy-config.yml");
         YamlConfiguration ymlData = getData();
         Field[] fields = PasswordConfigEntity.class.getDeclaredFields();
         for (Field field : fields) {

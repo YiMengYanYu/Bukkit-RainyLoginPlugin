@@ -1,6 +1,6 @@
-package com.ym.util.config;
+package com.rainy.util.config;
 
-import com.ym.constants.FileConstant;
+import com.rainy.constants.FileConstant;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -9,7 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

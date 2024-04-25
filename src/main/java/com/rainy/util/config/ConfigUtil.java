@@ -1,8 +1,6 @@
-package com.ym.util.config;
+package com.rainy.util.config;
 
-import com.ym.constants.FileConstant;
-import com.ym.util.config.ConfigUtil;
-import com.ym.ymlogin.YMLogin;
+import com.rainy.constants.FileConstant;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,34 +11,13 @@ import java.io.IOException;
 
 /**
  * @author YiMeng
- * @DateTime: 2024/4/5 0:17
- * @Description: 注册用户信息配置文件工具类
+ * @DateTime: 2024/4/12 19:20
+ * @Description: 配置文件通用父类，请不要直接调用
  */
-public class RegConfigUtil  {
-
+public  class ConfigUtil {
     private static YamlConfiguration data;
     private static File file = null;
 
-    public static void loadData() {
-
-       createFile(FileConstant.PLAYER_PASSWORDS_YML);
-    }
-
-
-    /**
-     * 获取玩家是否注册
-     * @param playerName
-     * @return 注册了返回true 没注册返回false
-     */
-    public  static boolean isRegister(String playerName) {
-        getData();
-        String password = data.getString(playerName + ".password");
-        if (password == null || password.length()==0 ) {
-            return false;
-        }
-
-        return true;
-    }
 
     /**
      * 使用Bukkit加载配置文件,如果resources(资源目录)下没有配置文件就不会加载
@@ -50,14 +27,16 @@ public class RegConfigUtil  {
     protected  static void loadData(JavaPlugin ymLogin, String configName) {
 
 
-        file = new File(ymLogin.getDataFolder(), configName);
-        if (!file.exists()) {
+        ConfigUtil.file = new File(ymLogin.getDataFolder(), configName);
+        if (!ConfigUtil.file.exists()) {
             ymLogin.getLogger().info(configName+" 文件不存在，已创建新文件");
             ymLogin.saveResource(configName, false);
         }
-        data = YamlConfiguration.loadConfiguration(file);
+        data = YamlConfiguration.loadConfiguration(ConfigUtil.file);
         ymLogin.getLogger().info(configName+" 文件成功加载");
     }
+
+
     /**
      * 传统File方式创建文件 不需要在资源文件夹中创建文件
      * @param fileName
@@ -97,6 +76,8 @@ public class RegConfigUtil  {
 
     }
 
+
+
     /**
      * 通过File对象重新加载配置文件 返回 YamlConfiguration
      * @return YamlConfiguration
@@ -113,8 +94,6 @@ public class RegConfigUtil  {
     public static File getFile() {
         return file;
     }
-
-
 
 
 }

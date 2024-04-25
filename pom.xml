@@ -4,12 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ym</groupId>
-    <artifactId>YMLogin</artifactId>
-    <version>1.0</version>
+    <groupId>com.rainy</groupId>
+    <artifactId>RainyLogin</artifactId>
+    <version>1.2.0</version>
     <packaging>jar</packaging>
 
-    <name>YMLogin</name>
+    <name>RainyLogin</name>
 
     <description>忆梦登录插件</description>
     <properties>
@@ -89,7 +89,16 @@
             <version>4.13.1</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>2.0.20</version>
+        </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

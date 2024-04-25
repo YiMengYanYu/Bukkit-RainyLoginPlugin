@@ -1,4 +1,4 @@
-package com.ym.entity;
+package com.rainy.entity;
 
 
 

@@ -1,6 +1,6 @@
-package com.ym.util;
+package com.rainy.util;
 
-import com.ym.entity.PasswordConfigEntity;
+import com.rainy.entity.PasswordConfigEntity;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 

@@ -1,9 +1,8 @@
-package com.ym.listener;
+package com.rainy.listener;
 
-import com.ym.entity.LoginConfig;
-import com.ym.util.config.RegConfigUtil;
-import com.ym.util.SessionUtil;
-import org.bukkit.Bukkit;
+import com.rainy.entity.LoginConfig;
+import com.rainy.util.config.RegConfigUtil;
+import com.rainy.util.SessionUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Objects;
-import java.util.Timer;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

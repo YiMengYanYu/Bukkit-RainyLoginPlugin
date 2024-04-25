@@ -1,6 +1,6 @@
-package com.ym.command;
+package com.rainy.command;
 
-import com.ym.util.config.WhiteListConfigUtil;
+import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
+
 import java.util.logging.Logger;
 
 /**
@@ -43,7 +43,7 @@ public class BaiCommand implements TabExecutor {
                     WhiteListConfigUtil.whitelist.add(args[1]);
                     WhiteListConfigUtil.saveConfig();
 
-                    Bukkit.getConsoleSender().sendMessage("保存白名单成功");
+                    sender.sendMessage("保存白名单成功");
 
 
                 }

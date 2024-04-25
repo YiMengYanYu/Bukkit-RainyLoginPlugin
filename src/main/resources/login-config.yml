@@ -7,3 +7,9 @@ whitelist:
 ipLogin:
   #IP登录总开关
   ipLoginCheckSwitch: false
+
+#此功能连接QQ机器人尚未开发
+webSocket:
+  #WebSocket总开关
+  webSocketCheckSwitch: false
+  webSocketUrl: ws://localhost:8080/
