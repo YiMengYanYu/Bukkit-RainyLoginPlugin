@@ -20,10 +20,11 @@ load: POSTWORLD
 #depend:
 #  - xxx
 #  - xxx
+
 #设置服务器软依赖的插件，这里的插件不是必须的，脱离是可以运行的,自己插件在他们加载之后再加载
-#sortdepend:
-#  - xxx
-#  - xxx
+softdepend:
+  - LuckPerms
+
 
 #自己的插件会在这个列表的插件之前被加载
 #loadbefore:
@@ -32,18 +33,40 @@ load: POSTWORLD
 
 #声明插件希望注册的权限
 permissions:
+  rainyLogin.*:
+    description: rainyLogin登录插件所有权限
+    default: op
+    children:
+      - rainyLogin.login
+      - rainyLogin.register
+      - rainyLogin.bai
+  rainyLogin.login:
+    description: 登录权限
+    default: true
+  rainyLogin.register:
+    description: 注册权限
+    default: true
+  rainyLogin.bai:
+    description: 白名单命令
+    default: op
 #注册插件需要用到的指令
 commands:
   login:
     description: /login <登录密码>
     usage: /login <password>
+    permission: rainyLogin.login
+    permission-message: 你没有权限执行此命令
   register:
     description: /register <密码> <第二次输入密码>
     usage: /register <password> <password>
     aliases: ["reg"]
+    permission: rainyLogin.register
+    permission-message: 你没有权限执行此命令
   bai:
+    description: 白名单命令
+    permission: rainyLogin.bai
+    permission-message: 你没有权限执行此命令
   rws:
-
 
 
 #修改日志的前缀

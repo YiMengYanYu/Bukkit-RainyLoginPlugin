@@ -1,5 +1,7 @@
 package com.rainy.listener;
 
+import com.rainy.entity.LoginConfig;
+import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
@@ -20,6 +22,13 @@ public class PlayerLoginListener implements Listener {
 
         logger.info( event.getPlayer().getName());
         String playerName = event.getPlayer().getName();
+        //如果白名单没有开就不拦截
+        if(!LoginConfig.whitelistCheckSwitch){
+            event.allow();
+            return;
+
+        }
+
         if (WhiteListConfigUtil.whitelist ==null ||!WhiteListConfigUtil.whitelist.contains(playerName)) {
           //  event.setKickMessage("你还没有服务器白名单");
             event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST,"你还没有服务器白名单");

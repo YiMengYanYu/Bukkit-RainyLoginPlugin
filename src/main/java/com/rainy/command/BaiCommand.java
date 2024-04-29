@@ -1,5 +1,7 @@
 package com.rainy.command;
 
+import com.rainy.entity.PlayerEntity;
+import com.rainy.util.SessionUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -8,6 +10,7 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,14 +27,8 @@ public class BaiCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (sender instanceof Player){
-            Player player = (Player) sender;
-            if (!player.isOp()) {
-                player.sendMessage("你不可以使用这个命令");
-                return false;
-            }
 
-        }
+
         if (args.length<=1||args[0]==null){
             sender.sendMessage("请输入正确的命令");
             return false;
@@ -50,7 +47,14 @@ public class BaiCommand implements TabExecutor {
                 break;
             case "delete":
                 if (args.length==2||args[1]!=null){
+             //  PlayerEntity playerEntity = SessionUtil.getPlayerEntityByPlayerName(args[1]);
 
+
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"kick "+args[1]);
+                    WhiteListConfigUtil.whitelist.remove(args[1]);
+
+                    WhiteListConfigUtil.saveConfig();
+                    sender.sendMessage("删除白名单成功");
 
                 }
                 break;
@@ -74,13 +78,7 @@ public class BaiCommand implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         LinkedList<String> tips = new LinkedList<>();
-        if (sender instanceof Player ){
-            Player player =(Player) sender;
-            //如果不是管理员就不执行命令补全
-            if (!player.isOp()) {
-                return new LinkedList<>();
-            }
-        }
+
         //处理第一个参数
         if (args.length == 1) {
             //如果只输入一个空格时

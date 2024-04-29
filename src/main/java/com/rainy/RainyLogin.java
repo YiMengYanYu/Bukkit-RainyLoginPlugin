@@ -29,16 +29,19 @@ public final class RainyLogin extends JavaPlugin {
      */
     @Override
     public void onLoad() {
+        Bukkit.broadcastMessage("服务器已刷新请重新登录");
+        Bukkit.broadcastMessage("/login <密码>");
         WebSocketClient.setJavaPlugin(this);
         //登录配置文件
         LoginConfigUtil.createLoginConfig(this);
         //白名单配置文件
         WhiteListConfigUtil.createWhiteListConfig(this);
+        //密码配置文件
         PasswordConfigSetUtil.setConfig(this);
-        Bukkit.broadcastMessage("服务器已刷新请重新登录");
-        Bukkit.broadcastMessage("/login <密码>");
+
         //注册配置文件
         RegConfigUtil.loadData();
+        //尝试启动ws
         WebSocketClient.ws();
     }
 

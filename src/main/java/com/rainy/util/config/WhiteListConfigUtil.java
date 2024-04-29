@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author YiMeng
@@ -36,7 +37,8 @@ public class WhiteListConfigUtil  {
 
         getData();
      whitelist =  data.getStringList("whitelist");
-
+     //去重
+     whitelist=  whitelist.stream().distinct().collect(Collectors.toList());
 
     }
 
@@ -45,6 +47,8 @@ public class WhiteListConfigUtil  {
      */
     public static void saveConfig() {
         getData();
+        //去重
+        whitelist=whitelist.stream().distinct().collect(Collectors.toList());
         data.set("whitelist", whitelist);
         try {
             data.save(file);

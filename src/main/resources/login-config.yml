@@ -1,7 +1,7 @@
 #此文件配置修改后重启和reload才会生效
 
 whitelist:
-  #白名单总开关
+  #白名单总开关 添加白名单命令 /bai add
   whitelistCheckSwitch: false
 
 ipLogin:
