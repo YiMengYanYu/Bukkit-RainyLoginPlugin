@@ -33,7 +33,7 @@ public class LoginCommand implements CommandExecutor {
 
         if (SessionUtil.getPlayerState(name)) {
             sender.sendMessage("您已经登录过了，请不要重复登录");
-            return  false;
+            return  true;
         }
         if (player == null) {
             return false;
@@ -44,7 +44,7 @@ public class LoginCommand implements CommandExecutor {
 
         if (loginPassword == null) {
             sender.sendMessage("请先注册");
-            return false;
+            return true;
         }
 
         if (password == null) {
@@ -56,12 +56,13 @@ public class LoginCommand implements CommandExecutor {
             //登录成功后，玩家取消无敌
             player.setInvulnerable(false);
             SessionUtil.setPlayerEntityMapByPlayer(player);
+            return true;
         } else {
             sender.sendMessage(ChatColor.RED + "密码错误");
             return false;
         }
 
-        return true;
+
 
     }
 

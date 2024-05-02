@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @DateTime: 2024/4/14 4:33
  * @Description: TODO
  */
-public class PasswordConfigSetUtil {
+public class PasswordPolicyConfigUtil {
     private static YamlConfiguration data;
     private static File file = null;
     private static final Logger logger = Bukkit.getLogger();

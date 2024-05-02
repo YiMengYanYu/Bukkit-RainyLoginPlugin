@@ -1,11 +1,14 @@
 package com.rainy.command;
 
+import com.google.inject.Inject;
 import com.rainy.websocket.WebSocketClient;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.logging.Logger;
 
 /**
  * @author YiMeng
@@ -14,6 +17,8 @@ import org.bukkit.entity.Player;
  */
 public class WSCommand implements CommandExecutor {
 
+    @Inject
+    private Logger logger;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,7 +30,7 @@ public class WSCommand implements CommandExecutor {
             }
         }
         WebSocketClient.ws();
-        Bukkit.getLogger().info("ws重启成功");
+        logger.info("ws重启成功");
         return true;
     }
 }

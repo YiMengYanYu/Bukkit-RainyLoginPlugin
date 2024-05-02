@@ -15,7 +15,7 @@ import java.util.concurrent.Callable;
 /**
  * @author YiMeng
  * @DateTime: 2024/4/15 下午11:34
- * @Description: TODO
+ * @Description: WebSocket客户端
  */
 @ClientEndpoint
 public class WebSocketClient {
@@ -82,6 +82,7 @@ public class WebSocketClient {
 
         try {
             Session  session = container.connectToServer(WebSocketClient.class, URI.create(uri));
+
             session.getBasicRemote().sendText("机器人已经连接成功");
 
 

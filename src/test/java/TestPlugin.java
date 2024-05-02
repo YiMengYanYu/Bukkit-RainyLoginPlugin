@@ -1,3 +1,4 @@
+import com.rainy.websocket.WebSocketClient;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,19 +15,7 @@ public class TestPlugin {
 
 @Test
 public void  test1(){
-    List<String> arrayList = new ArrayList();
-    arrayList.add("a");
-    arrayList.add("a");
-    arrayList.add("a");
-    arrayList.add("a");
-    arrayList.add("B");
-    arrayList.add("A");
-    arrayList.add("C");
-    arrayList.add("D");
-    arrayList=   arrayList.stream().distinct().collect(Collectors.toList());
-    arrayList.forEach(
-            System.out::print
-    );
+
 }
 
 

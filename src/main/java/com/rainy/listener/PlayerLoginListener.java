@@ -1,13 +1,17 @@
 package com.rainy.listener;
 
+import com.google.inject.Inject;
 import com.rainy.entity.LoginConfig;
 import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
+import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Logger;
 
 /**
@@ -16,12 +20,26 @@ import java.util.logging.Logger;
  * @Description: 玩家登录事件监听
  */
 public class PlayerLoginListener implements Listener {
-    private  static Logger logger = Bukkit.getLogger();
+    @Inject
+    private   Logger logger ;
     @EventHandler
     public  void  playerLoginEvent(PlayerLoginEvent event){
 
-        logger.info( event.getPlayer().getName());
+      //  logger.info( event.getPlayer().getName());
         String playerName = event.getPlayer().getName();
+
+
+        Set<OfflinePlayer> bannedPlayers = Bukkit.getBannedPlayers();
+        //判断是否被ban
+        for (OfflinePlayer bannedPlayer : bannedPlayers) {
+            if (bannedPlayer.getName().equals(playerName)) {
+                event.disallow(PlayerLoginEvent.Result.KICK_BANNED,"你已经被ban了");
+                return;
+            }
+        }
+
+
+
         //如果白名单没有开就不拦截
         if(!LoginConfig.whitelistCheckSwitch){
             event.allow();

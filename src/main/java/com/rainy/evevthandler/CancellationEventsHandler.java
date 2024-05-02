@@ -1,4 +1,4 @@
-package com.rainy.evevtmanager;
+package com.rainy.evevthandler;
 
 import com.rainy.util.SessionUtil;
 import org.bukkit.entity.HumanEntity;
