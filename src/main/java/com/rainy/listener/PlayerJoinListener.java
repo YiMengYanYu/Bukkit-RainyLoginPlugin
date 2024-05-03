@@ -47,7 +47,7 @@ public class PlayerJoinListener implements Listener {
         player.setInvulnerable(true);
 
         //设置玩家初始位置
-        setPlayerLocation(player);
+    //    setPlayerLocation(player);
         //查询是否注册成功
         if (isNoRegister(player)) {
             isNoLogin(player);
@@ -146,24 +146,37 @@ public class PlayerJoinListener implements Listener {
 
     }
 
+
     private  void  setPlayerLocation(Player player)
     {
+        if (player.isOnGround()) {
+            return;
+        }
 
         int y = (int) player.getLocation().getY()-1; //获取玩家Y轴坐标既纵坐标
+        Double x = ((int) player.getLocation().getX())+0.5;
+        Double z = ((int) player.getLocation().getZ())+0.5;
+        logger.info("========================================");
+        logger.info("x"+x+"y"+y+"z"+z);
         Block block1 = player.getLocation().getBlock();
         if(block1.getType().equals(Material.AIR)){
-            for(int a=y;;a--){
-                Location location = new Location(player.getWorld(),player.getLocation().getX(),a,player.getLocation().getZ());
+            while (true){
+                //获取遍历到的那个坐标
+                Location location = new Location(player.getWorld(),x,y,z);
                 //刷新玩家掉落预知位置
                 Block block = player.getWorld().getBlockAt(location);
+
+                Material blockType = block.getType();
+
                 //获取掉落位置方块
-                if(!block.getType().equals(Material.AIR)&&!block.getType().equals(Material.WATER)){
-                    //判断是否非空气并且并且不是水
-                    location = new Location(player.getWorld(),player.getLocation().getX(),a+1,player.getLocation().getZ());
+                if(!blockType.equals(Material.AIR)){
+
+
                     //更新位置
-                    player.teleport(location);//把玩家扔过去
+                    player.teleport(location.add(0,1,0));//把玩家扔过去
                     break;
                 }
+                y--;
             }
         }
     }

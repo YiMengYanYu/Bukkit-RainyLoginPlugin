@@ -11,6 +11,9 @@ import com.rainy.listener.PlayerJoinListener;
 import com.rainy.listener.PlayerLoginListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
+import org.bukkit.plugin.PluginLogger;
+
+import java.util.logging.Logger;
 
 /**
  * @author YiMeng
@@ -27,7 +30,11 @@ public class RainyModule extends AbstractModule {
 
     @Override
     protected void configure() {
+
         bind(RainyLogin.class).toInstance(rainyLogin);
+        bind(PluginLogger.class).toInstance((PluginLogger) rainyLogin.getLogger());
+
+
         bind(ConsoleCommandSender.class).toInstance(Bukkit.getConsoleSender());
 
 

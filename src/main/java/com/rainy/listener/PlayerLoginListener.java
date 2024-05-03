@@ -23,24 +23,13 @@ public class PlayerLoginListener implements Listener {
     @EventHandler
     public  void  playerLoginEvent(PlayerLoginEvent event){
 
-      //  logger.info( event.getPlayer().getName());
+
         String playerName = event.getPlayer().getName();
-
-
-        Set<OfflinePlayer> bannedPlayers = Bukkit.getBannedPlayers();
-        //判断是否被ban
-        for (OfflinePlayer bannedPlayer : bannedPlayers) {
-            if (bannedPlayer.getName().equals(playerName)) {
-                event.disallow(PlayerLoginEvent.Result.KICK_BANNED,"你已经被ban了");
-                return;
-            }
-        }
-
 
 
         //如果白名单没有开就不拦截
         if(!LoginConfig.whitelistCheckSwitch){
-            event.allow();
+
             return;
 
         }
@@ -48,9 +37,6 @@ public class PlayerLoginListener implements Listener {
         if (WhiteListConfigUtil.whitelist ==null ||!WhiteListConfigUtil.whitelist.contains(playerName)) {
           //  event.setKickMessage("你还没有服务器白名单");
             event.disallow(PlayerLoginEvent.Result.KICK_WHITELIST,"你还没有服务器白名单");
-        }else {
-
-            event.allow();
         }
 
 

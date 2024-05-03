@@ -19,6 +19,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+
 
 /**
  * @author YiMeng
@@ -28,7 +30,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class RainyLogin extends JavaPlugin {
 
 
-   private static boolean firstLoad = true;
+
     /**
      * 世界加载前
      */
@@ -36,9 +38,8 @@ public final class RainyLogin extends JavaPlugin {
     public void onLoad() {
 
 
+        this.getLogger().info("RainyLogin开始加载配置文件");
 
-        Bukkit.broadcastMessage("服务器已刷新请重新登录");
-        Bukkit.broadcastMessage("/login <密码>");
         WebSocketClient.setJavaPlugin(this);
         //登录配置文件
         LoginConfigUtil.createLoginConfig(this);
@@ -59,14 +60,10 @@ public final class RainyLogin extends JavaPlugin {
     @Override
     public void onEnable() {
         Injector injector = Guice.createInjector(new RainyModule(this));
-        if(firstLoad){
-
-            firstLoad=false;
-        }
 
 
 
-        Bukkit.getConsoleSender().sendMessage("§aRainyLogin登录插件启动成功");
+
         //注册玩家监听器
         Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerJoinListener.class), this);
         //取消事件处理器
@@ -74,9 +71,6 @@ public final class RainyLogin extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerLoginListener.class), this);
 
 
-        YamlConfiguration data = RegConfigUtil.getData();
-
-        Bukkit.getConsoleSender().sendMessage("§"+data.toString());
         Bukkit.getPluginCommand("register").setExecutor(injector.getInstance(RegCommand.class));
         Bukkit.getPluginCommand("login").setExecutor(injector.getInstance(LoginCommand.class));
         Bukkit.getPluginCommand("bai").setExecutor(injector.getInstance(BaiCommand.class));
@@ -84,7 +78,7 @@ public final class RainyLogin extends JavaPlugin {
         Bukkit.getPluginCommand("rws").setExecutor(injector.getInstance(WSCommand.class));
 
 
-
+        this.getLogger().info("RainyLogin登录插件启动成功");
 
 
     }
@@ -94,8 +88,9 @@ public final class RainyLogin extends JavaPlugin {
      */
     @Override
     public void onDisable() {
+
         // Plugin shutdown logic
-        Bukkit.getConsoleSender().sendMessage("§a 插件关闭");
+        this.getLogger().info("RainyLogin插件关闭");
     }
 
 

@@ -1,7 +1,9 @@
 package com.rainy.evevthandler;
 
 import com.rainy.util.SessionUtil;
+import org.bukkit.Location;
 import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,7 +42,33 @@ public class CancellationEventsHandler implements Listener {
      */
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        handleEvents(event);
+        if (event instanceof Cancellable) {
+            Player player = event.getPlayer();
+            String name = player.getName();
+            if (!SessionUtil.getPlayerState(name)) {
+                Location from = event.getFrom();
+                Location to = event.getTo();
+
+                double dx = from.getX() - to.getX();
+                double dy = from.getY() - to.getY();
+                double dz = from.getZ() - to.getZ();
+
+                // 如果是水平移动，取消事件
+                if (Math.abs(dx) > 0 || Math.abs(dz) > 0) {
+                    event.setCancelled(true);
+
+                    return;
+                }
+
+
+
+                if (dy>0){
+                    event.setTo(to); // 允许垂直下落
+                }
+
+            }
+
+        }
     }
 
     /**
