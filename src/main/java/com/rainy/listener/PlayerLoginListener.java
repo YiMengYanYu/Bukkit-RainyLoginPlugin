@@ -2,7 +2,6 @@ package com.rainy.listener;
 
 import com.google.inject.Inject;
 import com.rainy.entity.LoginConfig;
-import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -10,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 
-import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 

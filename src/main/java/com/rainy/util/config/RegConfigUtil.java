@@ -90,7 +90,7 @@ public class RegConfigUtil  {
         } else {
             // 文件存在就直接把文件对象赋值
             file=passwordFile;
-            Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"文件"+fileName+"已存在于 "+FileConstant.YMLOGIN_YML_PATH+" 目录下");
+         //   Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN+"文件"+fileName+"已存在于 "+FileConstant.YMLOGIN_YML_PATH+" 目录下");
         }
 
     }

@@ -1,7 +1,7 @@
 package com.rainy.util.config;
 
-import com.rainy.entity.PasswordConfigEntity;
 import com.rainy.RainyLogin;
+import com.rainy.entity.PasswordConfigEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -44,7 +44,7 @@ public class PasswordPolicyConfigUtil {
             String tuoFeng = ymlData.getString("password." + param);
             try {
                 field.set(null, tuoFeng);
-                logger.info(param + ":" + field.get(tuoFeng));
+           //     logger.info(param + ":" + field.get(tuoFeng));
 
 
             } catch (IllegalAccessException e) {

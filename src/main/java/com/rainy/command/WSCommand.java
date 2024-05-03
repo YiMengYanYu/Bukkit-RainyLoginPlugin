@@ -2,7 +2,6 @@ package com.rainy.command;
 
 import com.google.inject.Inject;
 import com.rainy.websocket.WebSocketClient;
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

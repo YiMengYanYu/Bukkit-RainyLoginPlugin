@@ -1,20 +1,15 @@
 package com.rainy.command;
 
 import com.google.inject.Inject;
-import com.rainy.entity.PlayerEntity;
-import com.rainy.util.SessionUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 import java.util.logging.Logger;
 
 /**

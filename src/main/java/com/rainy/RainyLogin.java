@@ -9,12 +9,10 @@ import com.rainy.command.WSCommand;
 import com.rainy.evevthandler.CancellationEventsHandler;
 import com.rainy.guice.RainyModule;
 import com.rainy.listener.PlayerJoinListener;
-
 import com.rainy.listener.PlayerLoginListener;
 import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.PasswordPolicyConfigUtil;
 import com.rainy.util.config.RegConfigUtil;
-
 import com.rainy.util.config.WhiteListConfigUtil;
 import com.rainy.websocket.WebSocketClient;
 import org.bukkit.Bukkit;
@@ -24,9 +22,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * @author YiMeng
+ *
  */
 
 public final class RainyLogin extends JavaPlugin {
+
 
    private static boolean firstLoad = true;
     /**

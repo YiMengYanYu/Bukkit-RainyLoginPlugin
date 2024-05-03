@@ -1,7 +1,7 @@
 #项目名称
 name: RainyLogin
 #版本号
-version: '${project.version}'
+version: '${version}'
 #启动类类名
 main: com.rainy.RainyLogin
 #游戏大版本
@@ -11,7 +11,7 @@ authors: [ YiMeng ]
 #插件描述
 description: 忆梦登录插件
 #插件官网
-website:
+website: 
 #load 插件的加载方式
 # STARTUP在服务器加载世界前启动插件
 # POSTWORLD 在世界加载完后启动插件 这个是默认值

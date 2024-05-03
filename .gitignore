@@ -113,3 +113,6 @@ buildNumber.properties
 
 # Common working directory
 run/
+/build/
+
+/.gradle/

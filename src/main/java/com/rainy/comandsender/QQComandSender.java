@@ -1,7 +1,6 @@
 package com.rainy.comandsender;
 
 import org.bukkit.Server;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
@@ -16,6 +15,7 @@ import java.util.Set;
  * @Description: TODO
  */
 public class QQComandSender implements CommandSender {
+
     @Override
     public void sendMessage(String message) {
 
