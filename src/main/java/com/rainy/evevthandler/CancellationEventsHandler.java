@@ -7,11 +7,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
+
+import java.util.List;
 
 /**
  * @author YiMeng
@@ -35,6 +38,7 @@ public class CancellationEventsHandler implements Listener {
 
 
     }
+
     /**
      * 当玩家移动时，该事件发生
      *
@@ -61,8 +65,7 @@ public class CancellationEventsHandler implements Listener {
                 }
 
 
-
-                if (dy>0){
+                if (dy > 0) {
                     event.setTo(to); // 允许垂直下落
                 }
 
@@ -122,6 +125,7 @@ public class CancellationEventsHandler implements Listener {
     public void onPlayerDamage(PlayerItemDamageEvent event) {
         handleEvents(event);
     }
+
     /**
      * 玩家速度事件
      *
@@ -170,7 +174,7 @@ public class CancellationEventsHandler implements Listener {
         if (event instanceof Cancellable) {
 
             HumanEntity humanEntity = event.getViewers().get(0);
-            String name   =humanEntity.getName();
+            String name = humanEntity.getName();
             if (!SessionUtil.getPlayerState(name)) {
                 ((Cancellable) event).setCancelled(true);
             }
@@ -218,7 +222,7 @@ public class CancellationEventsHandler implements Listener {
      * @param event
      */
     @EventHandler
-    public  void  playerPortalEvent(PlayerPortalEvent event){
+    public void playerPortalEvent(PlayerPortalEvent event) {
 
         handleEvents(event);
 
@@ -226,14 +230,56 @@ public class CancellationEventsHandler implements Listener {
 
     /**
      * 玩家切换左右手
+     *
      * @param event
      */
     @EventHandler
-    public  void playerChangedMainHandEvent (PlayerChangedMainHandEvent event){
+    public void playerChangedMainHandEvent(PlayerChangedMainHandEvent event) {
 
         handleEvents(event);
 
     }
 
+    /**
+     * 当玩家点击一个实体时调用此事件.
+     */
+    @EventHandler
+    public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
 
+        // 处理玩家与实体交互的事件
+        handleEvents(event);
+    }
+
+    /**
+     * 当玩家在实体上点击某实体上的某位置时触发此事件.
+     *
+     * @param event
+     */
+    @EventHandler
+    public void onPlayerInteractAtEntityEvent(PlayerInteractAtEntityEvent event) {
+
+        // 处理玩家与实体交互的事件
+        handleEvents(event);
+    }
+
+    /**
+     * 当一个实体受到另外一个实体伤害时触发该事件
+     *
+     * @param event
+     */
+    @EventHandler
+    public static void playerattack(EntityDamageByEntityEvent event) {
+
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+            Player p1 = (Player) event.getDamager();
+            Player p2 = (Player) event.getEntity();
+
+            if (event instanceof Cancellable) {
+                String name = p1.getName();
+                if (!SessionUtil.getPlayerState(name)) {
+                    ((Cancellable) event).setCancelled(true);
+                }
+            }
+        }
+    }
 }

@@ -12,44 +12,47 @@ import com.rainy.listener.PlayerJoinListener;
 import com.rainy.listener.PlayerLoginListener;
 import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.PasswordPolicyConfigUtil;
-import com.rainy.util.config.RegConfigUtil;
+import com.rainy.util.config.PlayerPasswordsUtil;
 import com.rainy.util.config.WhiteListConfigUtil;
 import com.rainy.websocket.WebSocketClient;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.logging.Level;
 
 
 /**
  * @author YiMeng
  *
  */
-
 public final class RainyLogin extends JavaPlugin {
 
 
+    private static Injector injector =null;
+
+    public static <T> T getInstance(Class<T> type) {
+
+        return injector.getInstance(type);
+    }
 
     /**
      * 世界加载前
      */
     @Override
     public void onLoad() {
-
+        injector = Guice.createInjector(new RainyModule(this));
 
         this.getLogger().info("RainyLogin开始加载配置文件");
 
         WebSocketClient.setJavaPlugin(this);
         //登录配置文件
-        LoginConfigUtil.createLoginConfig(this);
+        LoginConfigUtil.createLoginConfig();
         //白名单配置文件
-        WhiteListConfigUtil.createWhiteListConfig(this);
-        //密码配置文件
-        PasswordPolicyConfigUtil.setConfig(this);
+        WhiteListConfigUtil.createWhiteListConfig();
 
-        //注册配置文件
-        RegConfigUtil.loadData();
+        //密码强度配置文件
+        PasswordPolicyConfigUtil.setConfig();
+
+        //注册信息配置文件
+        PlayerPasswordsUtil.createPlayerPasswords();
         //尝试启动ws
         WebSocketClient.ws();
     }
@@ -59,7 +62,6 @@ public final class RainyLogin extends JavaPlugin {
      */
     @Override
     public void onEnable() {
-        Injector injector = Guice.createInjector(new RainyModule(this));
 
 
 

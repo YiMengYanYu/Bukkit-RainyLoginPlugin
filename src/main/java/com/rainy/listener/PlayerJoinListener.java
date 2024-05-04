@@ -2,9 +2,9 @@ package com.rainy.listener;
 
 import com.google.inject.Inject;
 import com.rainy.RainyLogin;
-import com.rainy.entity.LoginConfig;
 import com.rainy.util.SessionUtil;
-import com.rainy.util.config.RegConfigUtil;
+import com.rainy.util.config.LoginConfigUtil;
+import com.rainy.util.config.PlayerPasswordsUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -64,7 +64,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void playerQuitEvent(PlayerQuitEvent playerQuitEvent) {
         //如果ip登录配置是关闭的
-        if (!LoginConfig.ipLoginCheckSwitch) {
+        if (!LoginConfigUtil.ipLoginCheckSwitch) {
             Player player = playerQuitEvent.getPlayer();
 
             SessionUtil.destroySession(player.getName());
@@ -81,7 +81,7 @@ public class PlayerJoinListener implements Listener {
      */
     private boolean isNoRegister(Player player) {
         //如果注册了
-        if (RegConfigUtil.isRegister(player.getName())) {
+        if (PlayerPasswordsUtil.isRegister(player.getName())) {
 
             return true;
         }

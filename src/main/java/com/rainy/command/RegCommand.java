@@ -3,7 +3,7 @@ package com.rainy.command;
 import com.rainy.util.CommandUtil;
 import com.rainy.util.PasswordCheckUtil;
 import com.rainy.util.SessionUtil;
-import com.rainy.util.config.RegConfigUtil;
+import com.rainy.util.config.PlayerPasswordsUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,7 +34,7 @@ public class RegCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = CommandUtil.playerCommandHandler(sender, args, 2);
-        if (player==null) {
+        if (player == null) {
             return false;
         }
 
@@ -61,27 +61,21 @@ public class RegCommand implements CommandExecutor {
     private void regPlayer(String name, String uuid, String password, Player player) {
 
 
-
-        if (!PasswordCheckUtil.checkPassword(password,player)) {
+        if (!PasswordCheckUtil.checkPassword(password, player)) {
             return;
         }
-        Map<String, String> hashMap = new HashMap(8);
-        YamlConfiguration data = RegConfigUtil.getData();
-        if (data.get(name) != null) {
+
+
+        if (PlayerPasswordsUtil.isRegister(name)) {
             player.sendMessage(ChatColor.RED + "您已经注册过了,不可以重复注册");
             return;
         }
 
 
-
-
-
-
-        hashMap.put("uuid", uuid + "");
-        hashMap.put("password", password + "");
-        data.set(name, hashMap);
         try {
-            data.save(RegConfigUtil.getFile());
+            PlayerPasswordsUtil.setPlayerPassword(name, password, uuid);
+
+
             player.sendMessage(ChatColor.YELLOW + "注册成功");
 
             player.setInvulnerable(false);

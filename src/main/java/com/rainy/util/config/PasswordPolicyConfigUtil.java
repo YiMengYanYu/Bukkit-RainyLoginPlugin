@@ -18,16 +18,17 @@ import java.util.logging.Logger;
  * @Description: TODO
  */
 public class PasswordPolicyConfigUtil {
-    private static YamlConfiguration data;
-    private static File file = null;
+    private static YamlConfiguration configuration;
+
     private static final Logger logger = Bukkit.getLogger();
 
+    private  static  final  String fileName = "password-policy-config.yml";
     /**
      * 设置密码配置
      */
-    public static void setConfig(RainyLogin rainyLogin) {
-        loadData(rainyLogin, "password-policy-config.yml");
-        YamlConfiguration ymlData = getData();
+    public static void setConfig() {
+        configuration = ConfigUtil.createConfig(fileName);
+
         Field[] fields = PasswordConfigEntity.class.getDeclaredFields();
         for (Field field : fields) {
             if (Modifier.isFinal(field.getModifiers())) {
@@ -41,10 +42,10 @@ public class PasswordPolicyConfigUtil {
             String param = snakeCaseToCamelCase(variableName);
 
 
-            String tuoFeng = ymlData.getString("password." + param);
+            String tuoFeng = configuration.getString("password." + param);
             try {
                 field.set(null, tuoFeng);
-           //     logger.info(param + ":" + field.get(tuoFeng));
+                //     logger.info(param + ":" + field.get(tuoFeng));
 
 
             } catch (IllegalAccessException e) {
@@ -58,19 +59,29 @@ public class PasswordPolicyConfigUtil {
     }
 
 
+    /**
+     * 将蛇形命名转换为驼峰命名。
+     *
+     * @param snakeStr 蛇形命名的字符串，例如"hello_world"。
+     * @return 转换后的驼峰命名字符串，例如"helloWorld"。
+     */
     public static String snakeCaseToCamelCase(String snakeStr) {
         StringBuilder camelStr = new StringBuilder();
         boolean nextUpperCase = false;
 
+        // 遍历字符串，将蛇形命名转换为驼峰命名
         for (int i = 0; i < snakeStr.length(); i++) {
             char c = snakeStr.charAt(i);
+            // 当遇到下划线时，标记下一个字符需要大写
             if (c == '_') {
                 nextUpperCase = true;
             } else {
+                // 如果下一个字符需要大写，则将其转换为大写并添加到结果中
                 if (nextUpperCase) {
                     camelStr.append(Character.toUpperCase(c));
                     nextUpperCase = false;
                 } else {
+                    // 否则，将字符转换为小写并添加到结果中
                     camelStr.append(Character.toLowerCase(c));
                 }
             }
@@ -79,37 +90,5 @@ public class PasswordPolicyConfigUtil {
         return camelStr.toString();
     }
 
-    /**
-     * 使用Bukkit加载配置文件,如果resources(资源目录)下没有配置文件就不会加载
-     * @param ymLogin
-     * @param configName
-     */
-    protected  static void loadData(JavaPlugin ymLogin, String configName) {
-
-
-        file = new File(ymLogin.getDataFolder(), configName);
-        if (!file.exists()) {
-            ymLogin.getLogger().info(configName+" 文件不存在，已创建新文件");
-            ymLogin.saveResource(configName, false);
-        }
-        data = YamlConfiguration.loadConfiguration(file);
-        ymLogin.getLogger().info(configName+" 文件成功加载");
-    }
-    /**
-     * 通过File对象重新加载配置文件 返回 YamlConfiguration
-     * @return YamlConfiguration
-     */
-    public static YamlConfiguration getData() {
-        data = YamlConfiguration.loadConfiguration(file);
-        return data;
-    }
-
-    /**
-     * 获取File对象
-     * @return
-     */
-    public static File getFile() {
-        return file;
-    }
 
 }

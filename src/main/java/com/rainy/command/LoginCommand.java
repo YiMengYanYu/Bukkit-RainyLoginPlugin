@@ -2,7 +2,7 @@ package com.rainy.command;
 
 import com.rainy.util.CommandUtil;
 import com.rainy.util.SessionUtil;
-import com.rainy.util.config.RegConfigUtil;
+import com.rainy.util.config.PlayerPasswordsUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -33,14 +33,14 @@ public class LoginCommand implements CommandExecutor {
 
         if (SessionUtil.getPlayerState(name)) {
             sender.sendMessage("您已经登录过了，请不要重复登录");
-            return  true;
+            return true;
         }
         if (player == null) {
             return false;
         }
 
         String password = args[0];
-        String loginPassword = RegConfigUtil.getData().getString(name + ".password");
+        String loginPassword = PlayerPasswordsUtil.getPlayerPassword(name);
 
         if (loginPassword == null) {
             sender.sendMessage("请先注册");
@@ -61,7 +61,6 @@ public class LoginCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.RED + "密码错误");
             return false;
         }
-
 
 
     }

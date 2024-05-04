@@ -1,9 +1,9 @@
 package com.rainy.websocket;
 
 import com.alibaba.fastjson2.JSON;
-import com.rainy.entity.LoginConfig;
 import com.rainy.entity.Result;
 
+import com.rainy.util.config.LoginConfigUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.Callable;
 /**
  * @author YiMeng
  * @DateTime: 2024/4/15 下午11:34
- * @Description: WebSocket客户端
+ * @Description: WebSocket客户端 这个是屎山代码，因为是自己用的
  */
 @ClientEndpoint
 public class WebSocketClient {
@@ -73,13 +73,13 @@ public class WebSocketClient {
     }
     public static void  ws(){
         //判断WebSocket总开关
-        if (!LoginConfig.webSocketCheckSwitch){
+        if (!LoginConfigUtil.webSocketCheckSwitch){
 
             return;
         }
 
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-        String uri = LoginConfig.webSocketUrl+"message/"; // WebSocket服务器地址
+        String uri = LoginConfigUtil.webSocketUrl+"message/"; // WebSocket服务器地址
 
         try {
             Session  session = container.connectToServer(WebSocketClient.class, URI.create(uri));

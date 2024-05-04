@@ -6,7 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.Player;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -20,22 +22,22 @@ import java.util.logging.Logger;
 public class BaiCommand implements TabExecutor {
 
     @Inject
-    private   Logger logger;
+    private Logger logger;
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
 
-
-        if (args.length<=1||args[0]==null){
+        if (args.length <= 1 || args[0] == null) {
             sender.sendMessage("请输入正确的命令");
             return false;
         }
 
-        switch (args[0]){
+        switch (args[0]) {
             case "add":
-                if (args.length==2||args[1]!=null){
-                    WhiteListConfigUtil.whitelist.add(args[1]);
-                    WhiteListConfigUtil.saveConfig();
+                if (args.length == 2 || args[1] != null) {
+                    WhiteListConfigUtil.addWhiteList(args[1]);
+
 
                     sender.sendMessage("保存白名单成功");
 
@@ -43,14 +45,20 @@ public class BaiCommand implements TabExecutor {
                 }
                 break;
             case "delete":
-                if (args.length==2||args[1]!=null){
-             //  PlayerEntity playerEntity = SessionUtil.getPlayerEntityByPlayerName(args[1]);
+                if (args.length == 2 || args[1] != null) {
+                    //  PlayerEntity playerEntity = SessionUtil.getPlayerEntityByPlayerName(args[1]);
+
+                    Player player = Bukkit.getPlayer(args[1]);
+                    if (player != null) {
+                        player.kickPlayer("您已被删除白名单");
+                    }
 
 
-                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),"kick "+args[1]);
-                    WhiteListConfigUtil.whitelist.remove(args[1]);
-
-                    WhiteListConfigUtil.saveConfig();
+                    try {
+                        WhiteListConfigUtil.removeWhiteList(args[1]);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     sender.sendMessage("删除白名单成功");
 
                 }
@@ -65,11 +73,11 @@ public class BaiCommand implements TabExecutor {
 
     /**
      * tab命令补全
-     * @param sender 发送者
-     * @param command 执行的命令
-     * @param alias 使用的别名
-     * @param args 传递给命令的参数，包括final
      *
+     * @param sender  发送者
+     * @param command 执行的命令
+     * @param alias   使用的别名
+     * @param args    传递给命令的参数，包括final
      * @return
      */
     @Override
