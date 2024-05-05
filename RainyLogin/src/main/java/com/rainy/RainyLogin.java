@@ -10,10 +10,7 @@ import com.rainy.evevthandler.CancellationEventsHandler;
 import com.rainy.guice.RainyModule;
 import com.rainy.listener.PlayerJoinListener;
 import com.rainy.listener.PlayerLoginListener;
-import com.rainy.util.config.LoginConfigUtil;
-import com.rainy.util.config.PasswordPolicyConfigUtil;
-import com.rainy.util.config.PlayerPasswordsUtil;
-import com.rainy.util.config.WhiteListConfigUtil;
+import com.rainy.util.config.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -41,7 +38,8 @@ public final class RainyLogin extends JavaPlugin {
         injector = Guice.createInjector(new RainyModule(this));
 
         this.getLogger().info("RainyLogin开始加载配置文件");
-
+        //创建玩家退出时的位置配置文件
+        offlineLocationsConfigUtil.createOfflineLocationsConfig();
         //WebSocketClient.setJavaPlugin(this);
         //登录配置文件
         LoginConfigUtil.createLoginConfig();

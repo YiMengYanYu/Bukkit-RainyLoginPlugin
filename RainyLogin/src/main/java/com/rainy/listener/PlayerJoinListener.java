@@ -5,17 +5,18 @@ import com.rainy.RainyLogin;
 import com.rainy.util.SessionUtil;
 import com.rainy.util.config.LoginConfigUtil;
 import com.rainy.util.config.PlayerPasswordsUtil;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import com.rainy.util.config.offlineLocationsConfigUtil;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -42,12 +43,15 @@ public class PlayerJoinListener implements Listener {
     public void playerJoin(PlayerJoinEvent playerJoinEvent) {
         // 阻止默认的加入消息显示
         playerJoinEvent.setJoinMessage(null);
+
         Player player = playerJoinEvent.getPlayer();
         //设置玩家无敌
         player.setInvulnerable(true);
-
+        World world = Bukkit.getWorld("world"); // 获取名为"world"的世界对象，根据你的服务器配置可能需要其他名字
+        Location spawnLocation = world.getSpawnLocation();
+        player.teleport(spawnLocation);
         //设置玩家初始位置
-    //    setPlayerLocation(player);
+        //    setPlayerLocation(player);
         //查询是否注册成功
         if (isNoRegister(player)) {
             isNoLogin(player);
@@ -59,20 +63,46 @@ public class PlayerJoinListener implements Listener {
     /**
      * 玩家退出游戏时
      *
-     * @param playerQuitEvent
+     * @param playerQuitEvent 玩家退出游戏时的事件
      */
     @EventHandler
     public void playerQuitEvent(PlayerQuitEvent playerQuitEvent) {
+        Player player = playerQuitEvent.getPlayer();
         //如果ip登录配置是关闭的
         if (!LoginConfigUtil.ipLoginCheckSwitch) {
-            Player player = playerQuitEvent.getPlayer();
-
             SessionUtil.destroySession(player.getName());
+        }
 
+        try {
+
+            offlineLocationsConfigUtil.setOfflineLocation(player);
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
 
 
+        //TODO 退出游戏后在多少秒内不让重连
     }
+
+    /**
+     * 玩家重生时
+     * @param event
+     */
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        if (!SessionUtil.getPlayerState(player.getName())) {
+
+            World world = Bukkit.getWorld("world"); // 获取名为"world"的世界对象，根据你的服务器配置可能需要其他名字
+            Location spawnLocation = world.getSpawnLocation();
+            event.setRespawnLocation(spawnLocation);
+        }
+
+    }
+
+
 
     /**
      * 检测是否注册
@@ -147,33 +177,32 @@ public class PlayerJoinListener implements Listener {
     }
 
 
-    private  void  setPlayerLocation(Player player)
-    {
+    private void setPlayerLocation(Player player) {
         if (player.isOnGround()) {
             return;
         }
 
-        int y = (int) player.getLocation().getY()-1; //获取玩家Y轴坐标既纵坐标
-        Double x = ((int) player.getLocation().getX())+0.5;
-        Double z = ((int) player.getLocation().getZ())+0.5;
+        int y = (int) player.getLocation().getY() - 1; //获取玩家Y轴坐标既纵坐标
+        Double x = ((int) player.getLocation().getX()) + 0.5;
+        Double z = ((int) player.getLocation().getZ()) + 0.5;
         logger.info("========================================");
-        logger.info("x"+x+"y"+y+"z"+z);
+        logger.info("x" + x + "y" + y + "z" + z);
         Block block1 = player.getLocation().getBlock();
-        if(block1.getType().equals(Material.AIR)){
-            while (true){
+        if (block1.getType().equals(Material.AIR)) {
+            while (true) {
                 //获取遍历到的那个坐标
-                Location location = new Location(player.getWorld(),x,y,z);
+                Location location = new Location(player.getWorld(), x, y, z);
                 //刷新玩家掉落预知位置
                 Block block = player.getWorld().getBlockAt(location);
 
                 Material blockType = block.getType();
 
                 //获取掉落位置方块
-                if(!blockType.equals(Material.AIR)){
+                if (!blockType.equals(Material.AIR)) {
 
 
                     //更新位置
-                    player.teleport(location.add(0,1,0));//把玩家扔过去
+                    player.teleport(location.add(0, 1, 0));//把玩家扔过去
                     break;
                 }
                 y--;

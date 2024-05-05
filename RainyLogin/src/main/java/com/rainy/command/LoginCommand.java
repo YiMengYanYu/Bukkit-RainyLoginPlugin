@@ -3,6 +3,7 @@ package com.rainy.command;
 import com.rainy.util.CommandUtil;
 import com.rainy.util.SessionUtil;
 import com.rainy.util.config.PlayerPasswordsUtil;
+import com.rainy.util.config.offlineLocationsConfigUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -55,6 +56,7 @@ public class LoginCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.YELLOW + "登录成功");
             //登录成功后，玩家取消无敌
             player.setInvulnerable(false);
+            player.teleport(offlineLocationsConfigUtil.getLocationByPlayerName(player.getName()));
             SessionUtil.setPlayerEntityMapByPlayer(player);
             return true;
         } else {
