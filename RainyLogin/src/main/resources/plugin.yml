@@ -26,6 +26,7 @@ softdepend:
   - LuckPerms
 
 
+
 #自己的插件会在这个列表的插件之前被加载
 #loadbefore:
 #  - xxx

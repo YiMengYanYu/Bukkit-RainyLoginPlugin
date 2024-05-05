@@ -5,7 +5,7 @@ import com.rainy.RainyLogin;
 import com.rainy.command.BaiCommand;
 import com.rainy.command.LoginCommand;
 import com.rainy.command.RegCommand;
-import com.rainy.command.WSCommand;
+
 import com.rainy.evevthandler.CancellationEventsHandler;
 import com.rainy.listener.PlayerJoinListener;
 import com.rainy.listener.PlayerLoginListener;
@@ -46,7 +46,7 @@ public class RainyModule extends AbstractModule {
         bind(BaiCommand.class).asEagerSingleton();
         bind(LoginCommand.class).asEagerSingleton();
         bind(RegCommand.class).asEagerSingleton();
-        bind(WSCommand.class).asEagerSingleton();
+       // bind(WSCommand.class).asEagerSingleton();
     }
 
 //    @Provides

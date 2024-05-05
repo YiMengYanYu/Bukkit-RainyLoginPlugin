@@ -1,0 +1,44 @@
+#项目名称
+name: RainyBukkitBot
+#版本号
+version: '${version}'
+#启动类类名
+main: com.rainy.RainyBukkitBot
+#游戏大版本
+api-version: 1.20
+#作者
+authors: [ YiMeng ]
+#插件描述
+description: 忆梦Bot服务端部分
+#插件官网
+website:
+#load 插件的加载方式
+# STARTUP在服务器加载世界前启动插件
+# POSTWORLD 在世界加载完后启动插件 这个是默认值
+load: POSTWORLD
+#设置服务器依赖的插件，没有就不能运行,自己插件在他们加载之后再加载
+#depend:
+#  - xxx
+#  - xxx
+
+#设置服务器软依赖的插件，这里的插件不是必须的，脱离是可以运行的,自己插件在他们加载之后再加载
+softdepend:
+  - RainyLogin
+
+
+#自己的插件会在这个列表的插件之前被加载
+#loadbefore:
+#  - xxx
+#  - xxx
+
+#声明插件希望注册的权限
+permissions:
+
+#注册插件需要用到的指令
+commands:
+  rws:
+
+
+#修改日志的前缀
+perfix: RainyBukkitBot
+# player_passwords.yml

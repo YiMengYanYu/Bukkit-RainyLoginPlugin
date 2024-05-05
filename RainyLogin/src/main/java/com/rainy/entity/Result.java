@@ -12,6 +12,9 @@ public class Result {
    private String senderName;
    private String senderId;
 
+
+
+
    public Result() {
    }
 

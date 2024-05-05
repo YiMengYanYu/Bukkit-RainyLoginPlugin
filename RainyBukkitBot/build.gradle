@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    // 应用'java-library'插件，以支持Java库项目的构建与管理
+    id 'java-library'
+
+    // 引入'maven-publish'插件，以便将项目发布到Maven仓库
+    id 'maven-publish'
+    //shadow插件
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'com.rainy'
+version = '1.2.0'
+
+repositories {
+    // 包含本地Maven仓库，便于使用本地已安装的依赖
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+// API级别的依赖，会暴露给依赖此项目的其他模块
+    api libs.org.apache.tomcat.embed.tomcat.embed.websocket
+
+    // 编译时依赖，编译时需要但运行时不需要，不会被打包进最终的JAR
+    compileOnly libs.org.spigotmc.spigot.api
+    compileOnly libs.org.projectlombok.lombok
+    compileOnly project(':RainyLogin')
+
+    //测试范围的依赖，仅用于编译和运行测试代码
+    testImplementation libs.junit.junit
+}
+
+shadowJar {
+    archiveBaseName = 'RainyBukkitBot'
+    archiveClassifier=''
+    destinationDirectory = file('D:\\java\\server\\plugins')
+
+}
+
+test {
+    useJUnitPlatform()
+}
