@@ -13,13 +13,14 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 
 /**
  * @author YiMeng
  * @DateTime: 2024/4/12 1:03
- * @Description: 取消事件处理程序
+ * @Description: 本类只做取消未登录的不合法事件
  */
 public class CancellationEventsHandler implements Listener {
 
@@ -46,30 +47,23 @@ public class CancellationEventsHandler implements Listener {
      */
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
-        if (event instanceof Cancellable) {
-            Player player = event.getPlayer();
-            String name = player.getName();
-            if (!SessionUtil.getPlayerState(name)) {
-                Location from = event.getFrom();
-                Location to = event.getTo();
 
-                double dx = from.getX() - to.getX();
-                double dy = from.getY() - to.getY();
-                double dz = from.getZ() - to.getZ();
+        Player player = event.getPlayer();
+        String name = player.getName();
+        if (!SessionUtil.getPlayerState(name)) {
+            Location from = event.getFrom();
+            Location to = event.getTo();
 
-                // 如果是水平移动，取消事件
-                if (Math.abs(dx) > 0 || Math.abs(dz) > 0) {
-                    event.setCancelled(true);
+            double dx = from.getX() - to.getX();
 
-                    return;
-                }
+            double dz = from.getZ() - to.getZ();
 
 
-                if (dy > 0) {
-                    event.setTo(to); // 允许垂直下落
-                }
-
+            // 如果是水平移动，取消事件
+            if (Math.abs(dx) > 0 || Math.abs(dz) > 0) {
+                event.setCancelled(true);
             }
+
 
         }
     }

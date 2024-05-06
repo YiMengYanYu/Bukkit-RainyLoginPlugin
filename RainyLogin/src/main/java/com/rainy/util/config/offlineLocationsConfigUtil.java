@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.Properties;
@@ -47,7 +48,13 @@ public class offlineLocationsConfigUtil {
     public static Location getLocationByPlayerName(String playerName) {
 
         String location = config.getString("offlineLocations." + playerName);
+        //如果没有上次的记录就返回到床上
+        if (location==null||"".equals(location)) {
 
+            Player player = Bukkit.getPlayer(playerName);
+           return player.getBedSpawnLocation();
+
+        }
         return strToLocation(location);
     }
 
@@ -65,6 +72,20 @@ public class offlineLocationsConfigUtil {
     }
 
 
+    /**
+     * 写入所有在线玩家的当前位置
+     */
+    public  static  void setAllOfflineLocation()  {
+
+        Collection<? extends Player> onlinePlayers = Bukkit.getOnlinePlayers();
+        onlinePlayers.forEach(player -> {
+            try {
+                offlineLocationsConfigUtil.setOfflineLocation(player);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
     /**
      * 字符串转成位置
      *

@@ -10,7 +10,7 @@ plugins {
 }
 
 group = 'com.rainy'
-version = '1.2.0'
+version = '1.0.0'
 
 repositories {
     // 包含本地Maven仓库，便于使用本地已安装的依赖

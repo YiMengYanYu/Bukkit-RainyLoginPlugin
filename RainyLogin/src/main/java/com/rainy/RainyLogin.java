@@ -8,8 +8,10 @@ import com.rainy.command.RegCommand;
 
 import com.rainy.evevthandler.CancellationEventsHandler;
 import com.rainy.guice.RainyModule;
-import com.rainy.listener.PlayerJoinListener;
+import com.rainy.listener.PlayerLocationListener;
 import com.rainy.listener.PlayerLoginListener;
+import com.rainy.listener.PlayerNameListener;
+import com.rainy.listener.PlayerWhiteListListener;
 import com.rainy.util.config.*;
 
 import org.bukkit.Bukkit;
@@ -62,11 +64,15 @@ public final class RainyLogin extends JavaPlugin {
     public void onEnable() {
 
 
-        //注册玩家监听器
-        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerJoinListener.class), this);
+        //注册监听器
+        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerWhiteListListener.class), this);
+        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerLoginListener.class), this);
+        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerNameListener.class), this);
+        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerLocationListener.class), this);
+
         //取消事件处理器
         Bukkit.getPluginManager().registerEvents(injector.getInstance(CancellationEventsHandler.class), this);
-        Bukkit.getPluginManager().registerEvents(injector.getInstance(PlayerLoginListener.class), this);
+
 
 
         Bukkit.getPluginCommand("register").setExecutor(injector.getInstance(RegCommand.class));
@@ -86,6 +92,7 @@ public final class RainyLogin extends JavaPlugin {
      */
     @Override
     public void onDisable() {
+        offlineLocationsConfigUtil.setAllOfflineLocation();
 
         // Plugin shutdown logic
         this.getLogger().info("RainyLogin插件关闭");

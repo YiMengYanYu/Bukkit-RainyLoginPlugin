@@ -12,12 +12,17 @@ public class TestPlugin {
 @Test
 public void  test1(){
 
-    Optional<String> o = Optional.ofNullable(null);
+    String testStr1 = "1_3";
+    String testStr2 = "32S1"; // 包含空格，应返回false
+    String testStr3 = "4_S";
 
-    System.out.println(o.get());
 
 
 }
 
+    public static boolean matches(String input) {
+        String regex = "^[a-zA-Z0-9_]*$";
+        return input.matches(regex);
+    }
 
 }

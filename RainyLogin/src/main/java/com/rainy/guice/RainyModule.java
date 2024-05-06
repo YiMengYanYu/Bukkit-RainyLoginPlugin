@@ -7,13 +7,13 @@ import com.rainy.command.LoginCommand;
 import com.rainy.command.RegCommand;
 
 import com.rainy.evevthandler.CancellationEventsHandler;
-import com.rainy.listener.PlayerJoinListener;
+import com.rainy.listener.PlayerLocationListener;
 import com.rainy.listener.PlayerLoginListener;
+import com.rainy.listener.PlayerNameListener;
+import com.rainy.listener.PlayerWhiteListListener;
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.PluginLogger;
-
-import java.util.logging.Logger;
 
 /**
  * @author YiMeng
@@ -38,21 +38,23 @@ public class RainyModule extends AbstractModule {
         bind(ConsoleCommandSender.class).toInstance(Bukkit.getConsoleSender());
 
 
-
-        bind(PlayerJoinListener.class).asEagerSingleton();
         bind(PlayerLoginListener.class).asEagerSingleton();
+        bind(PlayerWhiteListListener.class).asEagerSingleton();
         bind(CancellationEventsHandler.class).asEagerSingleton();
 
         bind(BaiCommand.class).asEagerSingleton();
         bind(LoginCommand.class).asEagerSingleton();
         bind(RegCommand.class).asEagerSingleton();
-       // bind(WSCommand.class).asEagerSingleton();
+        // bind(WSCommand.class).asEagerSingleton();
+
+        bind(PlayerLocationListener.class).asEagerSingleton();
+        bind(PlayerNameListener.class).asEagerSingleton();
     }
 
 //    @Provides
 //    @Singleton
-//    private PlayerJoinListener providePlayerJoinListener() {
+//    private PlayerLoginListener providePlayerJoinListener() {
 //
-//        return new PlayerJoinListener();
+//        return new PlayerLoginListener();
 //    }
 }
