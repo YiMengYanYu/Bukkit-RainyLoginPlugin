@@ -5,4 +5,5 @@
 rootProject.name = 'RainyProject'
 include 'RainyLogin'
 include 'RainyBukkitBot'
+include 'RainyCommon'
 

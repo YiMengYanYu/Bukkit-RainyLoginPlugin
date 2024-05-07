@@ -21,12 +21,13 @@ repositories {
 dependencies {
 
 // API级别的依赖，会暴露给依赖此项目的其他模块
+    api libs.com.alibaba.fastjson2.fastjson2
     api libs.org.apache.tomcat.embed.tomcat.embed.websocket
-
+    api libs.com.google.inject.guice
     // 编译时依赖，编译时需要但运行时不需要，不会被打包进最终的JAR
     compileOnly libs.org.spigotmc.spigot.api
     compileOnly libs.org.projectlombok.lombok
-    compileOnly project(':RainyLogin')
+   // compileOnly project(':RainyLogin')
 
     //测试范围的依赖，仅用于编译和运行测试代码
     testImplementation libs.junit.junit
@@ -41,4 +42,10 @@ shadowJar {
 
 test {
     useJUnitPlatform()
+}
+
+processResources() {
+    filesMatching('plugin.yml') {
+        expand(project.properties)
+    }
 }

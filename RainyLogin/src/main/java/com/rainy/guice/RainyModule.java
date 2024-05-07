@@ -32,7 +32,7 @@ public class RainyModule extends AbstractModule {
     protected void configure() {
 
         bind(RainyLogin.class).toInstance(rainyLogin);
-        bind(PluginLogger.class).toInstance((PluginLogger) rainyLogin.getLogger());
+
 
 
         bind(ConsoleCommandSender.class).toInstance(Bukkit.getConsoleSender());

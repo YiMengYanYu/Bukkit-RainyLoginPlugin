@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.rainy'
+version = '1.0.0'
+
+// 配置依赖仓库地址
+repositories {
+    // 包含本地Maven仓库，便于使用本地已安装的依赖
+    mavenLocal()
+
+    // 添加SpigotMC的快照仓库，用于获取Spigot插件开发相关的依赖
+    maven {
+        url = uri('https://hub.spigotmc.org/nexus/content/repositories/snapshots/')
+    }
+
+    // Sonatype的公共仓库群组，提供广泛的开源库依赖
+    maven {
+        url = uri('https://oss.sonatype.org/content/groups/public/')
+    }
+
+    // Sonatype的快照版本仓库，用于获取依赖的快照版本
+    maven {
+        url = uri('https://oss.sonatype.org/content/repositories/snapshots/')
+    }
+
+    // 中央Maven仓库，包含大部分公有依赖
+    maven {
+        url = uri('https://repo.maven.apache.org/maven2/')
+    }
+}
+
+dependencies {
+
+    // 编译时依赖，编译时需要但运行时不需要，不会被打包进最终的JAR
+    compileOnly libs.org.spigotmc.spigot.api
+
+}
+
+test {
+
+}

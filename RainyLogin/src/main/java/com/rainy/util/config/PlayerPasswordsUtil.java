@@ -2,7 +2,6 @@ package com.rainy.util.config;
 
 import com.rainy.constants.FileConstant;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +15,12 @@ import java.util.HashMap;
 public class PlayerPasswordsUtil {
 
     private static YamlConfiguration configuration;
-    private static File file = null;
+    private static File file;
 
     public static void createPlayerPasswords() {
 
         file = ConfigUtil.createFile(FileConstant.PLAYER_PASSWORDS_YML);
-
+        configuration = YamlConfiguration.loadConfiguration(file);
 
     }
 
@@ -33,7 +32,7 @@ public class PlayerPasswordsUtil {
      * @return 注册了返回true 没注册返回false
      */
     public static boolean isRegister(String playerName) {
-        setYamlConfigurationByFile();
+
         String password = configuration.getString(playerName + ".password");
         if (password == null || password.length() == 0) {
             return false;
@@ -70,13 +69,7 @@ public class PlayerPasswordsUtil {
         return password;
     }
 
-    /**
-     * 通过file获取YamlConfiguration
-     */
-    private static void setYamlConfigurationByFile() {
-        configuration = YamlConfiguration.loadConfiguration(file);
 
-    }
 
 
 }

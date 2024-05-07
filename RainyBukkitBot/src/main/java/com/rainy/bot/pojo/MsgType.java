@@ -1,4 +1,4 @@
-package com.rainy.entity;
+package com.rainy.bot.pojo;
 
 public enum MsgType {
 

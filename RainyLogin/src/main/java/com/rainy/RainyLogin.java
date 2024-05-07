@@ -53,8 +53,7 @@ public final class RainyLogin extends JavaPlugin {
 
         //注册信息配置文件
         PlayerPasswordsUtil.createPlayerPasswords();
-        //尝试启动ws
-      //  WebSocketClient.ws();
+
     }
 
     /**
@@ -79,7 +78,7 @@ public final class RainyLogin extends JavaPlugin {
         Bukkit.getPluginCommand("login").setExecutor(injector.getInstance(LoginCommand.class));
         Bukkit.getPluginCommand("bai").setExecutor(injector.getInstance(BaiCommand.class));
 
-       // Bukkit.getPluginCommand("rws").setExecutor(injector.getInstance(WSCommand.class));
+
 
 
         this.getLogger().info("RainyLogin登录插件启动成功");

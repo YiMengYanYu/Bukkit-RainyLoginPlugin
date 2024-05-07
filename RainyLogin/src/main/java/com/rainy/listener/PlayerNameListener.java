@@ -2,7 +2,6 @@ package com.rainy.listener;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerPreLoginEvent;
 
 /**
@@ -15,6 +14,7 @@ public class PlayerNameListener implements Listener {
 
     @EventHandler
     public void onPlayerLogin(PlayerPreLoginEvent event) {
+
         String playerName = event.getName();
 
         if (!matches(playerName)) {

@@ -3,7 +3,7 @@ name: RainyBukkitBot
 #版本号
 version: '${version}'
 #启动类类名
-main: com.rainy.RainyBukkitBot
+main: com.rainy.bot.RainyBukkitBot
 #游戏大版本
 api-version: 1.20
 #作者

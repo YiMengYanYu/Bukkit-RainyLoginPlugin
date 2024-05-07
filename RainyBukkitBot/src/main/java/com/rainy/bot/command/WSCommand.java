@@ -1,7 +1,7 @@
-package com.rainy.command;
+package com.rainy.bot.command;
 
 import com.google.inject.Inject;
-import com.rainy.websocket.WebSocketClient;
+import com.rainy.bot.websocket.WebSocketClient;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,6 +28,7 @@ public class WSCommand implements CommandExecutor {
                 return false;
             }
         }
+
         WebSocketClient.ws();
         logger.info("ws重启成功");
         return true;

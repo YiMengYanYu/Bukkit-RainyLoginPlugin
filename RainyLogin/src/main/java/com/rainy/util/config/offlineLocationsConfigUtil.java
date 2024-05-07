@@ -2,7 +2,6 @@ package com.rainy.util.config;
 
 import com.rainy.constants.FileConstant;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,7 +14,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.Properties;
 
 /**

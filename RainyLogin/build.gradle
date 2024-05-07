@@ -41,9 +41,11 @@ repositories {
 // 定义项目依赖
 dependencies {
 
-    api libs.com.alibaba.fastjson2.fastjson2
+
     api libs.com.github.ben.manes.caffeine.caffeine
     api libs.com.google.inject.guice
+    api project(":RainyCommon")
+
 
     // 测试范围的依赖，仅用于编译和运行测试代码
     testImplementation libs.junit.junit

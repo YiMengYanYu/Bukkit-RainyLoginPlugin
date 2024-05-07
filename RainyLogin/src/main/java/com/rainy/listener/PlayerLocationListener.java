@@ -12,10 +12,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginLogger;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * @author YiMeng
@@ -26,7 +25,7 @@ public class PlayerLocationListener implements Listener {
 
 
     @Inject
-    private PluginLogger logger;
+    private Logger logger;
 
     /**
      * 玩家退出游戏时

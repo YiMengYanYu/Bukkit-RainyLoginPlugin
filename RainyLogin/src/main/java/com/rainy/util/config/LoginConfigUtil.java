@@ -2,9 +2,6 @@ package com.rainy.util.config;
 
 
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 /**
  * @author YiMeng
@@ -57,10 +54,7 @@ public class LoginConfigUtil {
         LoginConfigUtil.whitelistCheckSwitch = config.getBoolean("whitelist.whitelistCheckSwitch");
         //ip登录配置
         LoginConfigUtil.ipLoginCheckSwitch = config.getBoolean("ipLogin.ipLoginCheckSwitch");
-        //WebSocket配置
-        LoginConfigUtil.webSocketCheckSwitch = config.getBoolean("webSocket.webSocketCheckSwitch");
-        //webSocketUrl
-        LoginConfigUtil.webSocketUrl = config.getString("webSocket.webSocketUrl");
+
 
 
     }

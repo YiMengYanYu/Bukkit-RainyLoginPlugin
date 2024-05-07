@@ -1,14 +1,18 @@
-package com.rainy.websocket;
+package com.rainy.bot.websocket;
+
 
 import com.alibaba.fastjson2.JSON;
-import com.rainy.entity.Result;
 
-import com.rainy.util.config.LoginConfigUtil;
+import com.rainy.bot.config.BotConfig;
+import com.rainy.bot.handler.ConsoleCommandSenderProxy;
+import com.rainy.bot.pojo.Result;
+import jakarta.websocket.*;
 import org.bukkit.Bukkit;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import jakarta.websocket.*;
 import java.io.IOException;
+
 import java.net.URI;
 import java.util.concurrent.Callable;
 
@@ -21,18 +25,19 @@ import java.util.concurrent.Callable;
 @ClientEndpoint
 public class WebSocketClient {
 
-
+    private ConsoleCommandSender consoleCommandSender =ConsoleCommandSenderProxy.createProxy(Bukkit.getConsoleSender());
     private static Session session;
-    private  static JavaPlugin javaPlugin;
-    public  static void  setJavaPlugin(JavaPlugin javaPlugin){
+    private static JavaPlugin javaPlugin;
+
+    public static void setJavaPlugin(JavaPlugin javaPlugin) {
         WebSocketClient.javaPlugin = javaPlugin;
     }
+
     @OnOpen
     public void onOpen(Session session) {
         WebSocketClient.session = session;
         System.out.println("Connected to server");
     }
-
 
 
     @OnMessage
@@ -41,20 +46,22 @@ public class WebSocketClient {
 
         Result result = JSON.parseObject(message, Result.class);
 
-        switch (result.getMsgType()){
+        switch (result.getMsgType()) {
 
             case msg:
-                Bukkit.broadcastMessage(result.getSenderName()+":"+result.getMsg());
+                Bukkit.broadcastMessage(result.getSenderName() + ":" + result.getMsg());
                 break;
             case command:
                 Callable taskCommand = () -> {
 
-                    if (Bukkit.dispatchCommand(Bukkit.getConsoleSender(),result.getMsg())) {
-                        sendMessage("执行命令成功");
+
+
+                    if (Bukkit.dispatchCommand(consoleCommandSender, result.getMsg())) {
+
                     }
                     return null;
                 };
-                Bukkit.getScheduler().callSyncMethod(javaPlugin,taskCommand);
+                Bukkit.getScheduler().callSyncMethod(javaPlugin, taskCommand);
 
                 break;
             default:
@@ -71,20 +78,21 @@ public class WebSocketClient {
             e.printStackTrace();
         }
     }
-    public static void  ws(){
+
+    public static void ws() {
         //判断WebSocket总开关
-        if (!LoginConfigUtil.webSocketCheckSwitch){
+        if (!BotConfig.webSocketCheckSwitch) {
 
             return;
         }
 
         WebSocketContainer container = ContainerProvider.getWebSocketContainer();
-        String uri = LoginConfigUtil.webSocketUrl+"message/"; // WebSocket服务器地址
+        String uri = BotConfig.webSocketUrl; // WebSocket服务器地址
 
         try {
-            Session  session = container.connectToServer(WebSocketClient.class, URI.create(uri));
+            Session session = container.connectToServer(WebSocketClient.class, URI.create(uri));
 
-            session.getBasicRemote().sendText("机器人已经连接成功");
+       //     session.getBasicRemote().sendText("机器人已经连接成功");
 
 
         } catch (Exception e) {
