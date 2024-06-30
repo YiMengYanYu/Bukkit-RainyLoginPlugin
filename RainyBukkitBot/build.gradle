@@ -33,6 +33,12 @@ dependencies {
     testImplementation libs.junit.junit
 }
 
+processResources() {
+    filesMatching('plugin.yml') {
+        expand(project.properties)
+    }
+}
+
 shadowJar {
     archiveBaseName = 'RainyBukkitBot'
     archiveClassifier=''
@@ -44,8 +50,3 @@ test {
     useJUnitPlatform()
 }
 
-processResources() {
-    filesMatching('plugin.yml') {
-        expand(project.properties)
-    }
-}

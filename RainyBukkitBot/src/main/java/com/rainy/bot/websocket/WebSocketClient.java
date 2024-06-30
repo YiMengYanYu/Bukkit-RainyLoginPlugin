@@ -90,9 +90,9 @@ public class WebSocketClient {
         String uri = BotConfig.webSocketUrl; // WebSocket服务器地址
 
         try {
-            Session session = container.connectToServer(WebSocketClient.class, URI.create(uri));
+             session = container.connectToServer(WebSocketClient.class, URI.create(uri));
 
-       //     session.getBasicRemote().sendText("机器人已经连接成功");
+           session.getBasicRemote().sendText("机器人连接成功");
 
 
         } catch (Exception e) {

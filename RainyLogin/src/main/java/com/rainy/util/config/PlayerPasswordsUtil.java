@@ -34,11 +34,7 @@ public class PlayerPasswordsUtil {
     public static boolean isRegister(String playerName) {
 
         String password = configuration.getString(playerName + ".password");
-        if (password == null || password.length() == 0) {
-            return false;
-        }
-
-        return true;
+        return password != null && password.length() != 0;
     }
 
     /**
@@ -61,6 +57,7 @@ public class PlayerPasswordsUtil {
 
     /**
      * 获取玩家的密码
+     *
      * @param playerName
      * @return
      */
@@ -69,7 +66,11 @@ public class PlayerPasswordsUtil {
         return password;
     }
 
+    public static boolean changePlayerPassword(String playerName, String newPassword) throws IOException {
+        configuration.set(playerName + ".password", newPassword);
+        configuration.save(file);
+        return true;
 
-
+    }
 
 }

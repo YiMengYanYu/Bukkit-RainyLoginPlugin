@@ -3,6 +3,7 @@ package com.rainy;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.rainy.command.BaiCommand;
+import com.rainy.command.ChangePasswordCommand;
 import com.rainy.command.LoginCommand;
 import com.rainy.command.RegCommand;
 
@@ -77,6 +78,7 @@ public final class RainyLogin extends JavaPlugin {
         Bukkit.getPluginCommand("register").setExecutor(injector.getInstance(RegCommand.class));
         Bukkit.getPluginCommand("login").setExecutor(injector.getInstance(LoginCommand.class));
         Bukkit.getPluginCommand("bai").setExecutor(injector.getInstance(BaiCommand.class));
+        Bukkit.getPluginCommand("changepassword").setExecutor(injector.getInstance(ChangePasswordCommand.class));
 
 
 

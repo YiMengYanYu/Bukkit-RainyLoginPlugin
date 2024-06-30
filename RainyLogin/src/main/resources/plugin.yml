@@ -50,6 +50,9 @@ permissions:
   rainyLogin.bai:
     description: 白名单命令
     default: op
+  rainylLogin.changepassword:
+    description: 修改密码权限
+    default: true
 #注册插件需要用到的指令
 commands:
   login:
@@ -62,6 +65,11 @@ commands:
     usage: /register <password> <password>
     aliases: ["reg"]
     permission: rainyLogin.register
+    permission-message: 你没有权限执行此命令
+  changepassword:
+    description: /changepassword <旧密码> <新密码>
+    usage: /changepassword <oldPassword> <newPassword>
+    permission: rainyLogin.changepassword
     permission-message: 你没有权限执行此命令
   bai:
     description: 白名单命令

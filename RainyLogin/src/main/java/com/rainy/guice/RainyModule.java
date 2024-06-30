@@ -3,6 +3,7 @@ package com.rainy.guice;
 import com.google.inject.AbstractModule;
 import com.rainy.RainyLogin;
 import com.rainy.command.BaiCommand;
+import com.rainy.command.ChangePasswordCommand;
 import com.rainy.command.LoginCommand;
 import com.rainy.command.RegCommand;
 
@@ -45,10 +46,12 @@ public class RainyModule extends AbstractModule {
         bind(BaiCommand.class).asEagerSingleton();
         bind(LoginCommand.class).asEagerSingleton();
         bind(RegCommand.class).asEagerSingleton();
+        bind(ChangePasswordCommand.class).asEagerSingleton();
         // bind(WSCommand.class).asEagerSingleton();
 
         bind(PlayerLocationListener.class).asEagerSingleton();
         bind(PlayerNameListener.class).asEagerSingleton();
+
     }
 
 //    @Provides
