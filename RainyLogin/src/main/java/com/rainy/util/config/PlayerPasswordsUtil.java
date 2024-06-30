@@ -32,7 +32,7 @@ public class PlayerPasswordsUtil {
      * @return 注册了返回true 没注册返回false
      */
     public static boolean isRegister(String playerName) {
-
+        configuration = YamlConfiguration.loadConfiguration(file);
         String password = configuration.getString(playerName + ".password");
         return password != null && password.length() != 0;
     }

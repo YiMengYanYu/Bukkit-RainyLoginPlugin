@@ -65,7 +65,7 @@ shadowJar {
 
 // 设置项目的基本信息
 group = 'com.rainy'          // 组织ID
-version = '1.2.1'           // 版本号
+version = '1.2.2'           // 版本号
 description = 'RainyLogin登录插件' // 项目描述
 java.sourceCompatibility = JavaVersion.VERSION_11 // 指定Java源代码兼容版本为11
 

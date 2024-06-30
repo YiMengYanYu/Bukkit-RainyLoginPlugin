@@ -5,6 +5,6 @@ whitelist:
   whitelistCheckSwitch: false
 
 ipLogin:
-  #IP登录总开关
+  #IP登录总开关(内网穿透的服务器开了无效)
   ipLoginCheckSwitch: false
 

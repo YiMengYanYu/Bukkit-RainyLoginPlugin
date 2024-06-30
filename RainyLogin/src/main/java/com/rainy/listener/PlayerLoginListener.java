@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.rainy.RainyLogin;
 import com.rainy.util.SessionUtil;
 import com.rainy.util.config.PlayerPasswordsUtil;
+import com.rainy.util.config.offlineLocationsConfigUtil;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -73,7 +74,7 @@ public class PlayerLoginListener implements Listener {
         SessionUtil.destroySession(player.getName());
 
 
-        new BukkitRunnable() {
+        new  BukkitRunnable() {
 
             @Override
             public void run() {
@@ -105,13 +106,16 @@ public class PlayerLoginListener implements Listener {
 
             String playerIp = SessionUtil.getPlayerIpByName(player.getName());
             String ip = player.getAddress().getHostString();
-            if (Objects.equals(playerIp, ip)) {
+
+            if (Objects.equals(playerIp, ip) && !Objects.equals(ip,"127.0.0.1") && !ip.startsWith("192.168")) {
                 //关闭无敌
                 player.setInvulnerable(false);
                 player.sendMessage(ChatColor.GREEN + "通过ip自动登录");
+                //回到玩家上次的位置
+                player.teleport(offlineLocationsConfigUtil.getLocationByPlayerName(player.getName()));
                 return;
             }
-            //如果登录的IP和上次不一致就先销毁session
+            //如果登录的IP和上次不一致或者是本地IP地址就先销毁session
             SessionUtil.destroySession(player.getName());
         }
         new BukkitRunnable() {

@@ -77,7 +77,7 @@ public class WhiteListConfigUtil {
      * @return
      */
     public static boolean contains(String playerName) {
-        Bukkit.getConsoleSender().sendMessage(whitelist.contains(playerName)+"111111111111111111111111111111111111111111111");
+     //   Bukkit.getConsoleSender().sendMessage(whitelist.contains(playerName)+"111111111111111111111111111111111111111111111");
         return whitelist.contains(playerName);
 
     }
