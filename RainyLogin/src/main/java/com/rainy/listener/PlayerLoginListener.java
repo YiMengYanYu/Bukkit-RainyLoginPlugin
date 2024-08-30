@@ -83,7 +83,7 @@ public class PlayerLoginListener implements Listener {
                     this.cancel();
                 } else {
 
-                    player.sendMessage("请注册后进入游戏");
+                    player.sendMessage("您尚未注册,请注册后进入游戏");
                     player.sendMessage("/reg <密码> <密码>");
                 }
 

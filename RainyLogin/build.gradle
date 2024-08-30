@@ -58,7 +58,7 @@ dependencies {
 shadowJar {
     archiveBaseName = 'RainyLogin'
     archiveClassifier=''
-    destinationDirectory = file('D:\\java\\server\\plugins')
+//    destinationDirectory = file('D:\\java\\server\\plugins')
 
 }
 
